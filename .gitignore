@@ -1,0 +1,23 @@
+# Node / frontend
+node_modules/
+dist/
+.vite/
+
+# Python / backend & pipeline
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.ruff_cache/
+
+# Secrets
+.env
+
+# Data (gitignored per PROJECT.md §8.3 — episodes.json is the only versioned exception)
+data/raw/
+data/processed/
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/

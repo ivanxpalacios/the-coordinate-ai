@@ -1,0 +1,8 @@
+[project]
+name = "pipeline"
+version = "0.1.0"
+description = "ETL pipeline for The Coordinate AI"
+requires-python = ">=3.12"
+dependencies = [
+    "pydantic>=2.0",
+]

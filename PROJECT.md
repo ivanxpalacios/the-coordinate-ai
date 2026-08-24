@@ -301,7 +301,7 @@ episodes (
   episode_in_season int,
   title             text,
   arc               text,            -- "Trost", "Rumbling", etc.
-  manga_chapters    int4range
+  manga_chapters    int[]
 )
 
 -- Progreso del usuario

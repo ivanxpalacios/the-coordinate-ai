@@ -22,10 +22,10 @@ Excluding fan art as an image source: this entails an additional layer of rights
 
 Mandatory attribution compliance for each scraped chunk; the fair use argument for images weakens if the project monetizes in the future; the "non-profit" statement of intent appears in the product disclaimer, not in a license file.
 
-## 5. Date
+## 6. Date
 
 August 21st, 2026.
 
-## 6. Author
+## 7. Author
 
 Iván Palacios Martínez

@@ -5,6 +5,7 @@ description = "ETL pipeline for The Coordinate AI"
 requires-python = ">=3.12"
 dependencies = [
     "pydantic>=2.0",
+    "requests>=2.31",
 ]
 
 [dependency-groups]

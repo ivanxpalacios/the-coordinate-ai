@@ -1,0 +1,42 @@
+name: api
+
+on:
+  push:
+    paths:
+      - "apps/api/**"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "apps/api/**"
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/api
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: apps/api/uv.lock
+          python-version-file: apps/api/.python-version
+
+      - run: uv sync
+
+      - run: uv run ruff check .
+
+      # TODO: quitar esta tolerancia una vez exista el primer test real.
+      # pytest sale con código 5 cuando no recolecta ningún test.
+      - name: Run tests
+        run: |
+          uv run pytest
+          code=$?
+          if [ $code -eq 5 ]; then
+            echo "No hay tests todavía — tolerado temporalmente."
+            exit 0
+          fi
+          exit $code

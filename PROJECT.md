@@ -259,7 +259,9 @@ the-coordinate-ai/
 ├── pipeline/                         # ETL en Python, se corre offline
 │   ├── pyproject.toml
 │   ├── src/
-│   │   ├── scrape.py
+│   │   ├── mediawiki_client.py       # cliente HTTP compartido hacia la API de MediaWiki
+│   │   ├── scrape_episodes.py        # descarga páginas de episodio (por temporada)
+│   │   ├── scrape_characters.py      # descarga páginas de entidad, corta por sección
 │   │   ├── clean.py
 │   │   ├── chunk.py
 │   │   ├── label.py                  # ⭐ asigna reveal_episode

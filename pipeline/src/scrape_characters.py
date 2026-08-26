@@ -11,8 +11,16 @@ from pathlib import Path
 from mediawiki_client import fetch_wikitext, title_to_page_name
 
 RAW_OUTPUT_DIR = Path(__file__).resolve().parents[2] / "data" / "raw" / "characters"
-SECTION_TO_EXTRACT = "Story"
-ENTITIES = ["Eren Yeager"]
+
+# Entity title -> wikitext sections to extract and concatenate.
+# Most characters have a "Story" section narrated arc by arc.
+# Ymir Fritz does not appear in real-time within the plot, so her page
+# lacks a "Story" section; instead, it uses "History" (biography) + "Legacy" (subsequent impact).
+ENTITIES: dict[str, list[str]] = {
+    "Eren Yeager": ["Story"],
+    "Zeke Yeager": ["Story"],
+    "Ymir Fritz": ["History", "Legacy"],
+}
 
 
 def extract_section(wikitext: str, section_title: str) -> str:
@@ -36,7 +44,7 @@ def output_path(title: str) -> Path:
 def scrape_entities() -> None:
     RAW_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-    for title in ENTITIES:
+    for title, section_names in ENTITIES.items():
         path = output_path(title)
 
         if path.exists():
@@ -45,8 +53,8 @@ def scrape_entities() -> None:
 
         print(f"[fetch] {title}")
         wikitext = fetch_wikitext(title)
-        section = extract_section(wikitext, SECTION_TO_EXTRACT)
-        path.write_text(section, encoding="utf-8")
+        sections = [extract_section(wikitext, name) for name in section_names]
+        path.write_text("\n\n".join(sections), encoding="utf-8")
 
 
 if __name__ == "__main__":

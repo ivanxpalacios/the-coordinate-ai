@@ -23,7 +23,6 @@ jobs:
         with:
           enable-cache: true
           cache-dependency-glob: pipeline/uv.lock
-          python-version-file: pipeline/.python-version
 
       - run: uv sync
 
@@ -33,8 +32,10 @@ jobs:
       # pytest sale con código 5 cuando no recolecta ningún test.
       - name: Run tests
         run: |
+          set +e
           uv run pytest
           code=$?
+          set -e
           if [ $code -eq 5 ]; then
             echo "No hay tests todavía — tolerado temporalmente."
             exit 0

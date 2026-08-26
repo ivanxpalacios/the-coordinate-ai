@@ -414,6 +414,7 @@ Generar vectores e insertar en `knowledge_chunks`. El pipeline debe ser idempote
 - Docker Compose funcionando en local
 - `episodes.json` completo y validado
 - Pipeline de CI básico (lint + tests)
+- COMPLETADA ✅
 
 ### Fase 1 — Spike de datos
 

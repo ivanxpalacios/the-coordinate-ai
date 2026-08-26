@@ -1,0 +1,43 @@
+name: pipeline
+
+on:
+  push:
+    paths:
+      - "pipeline/**"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "pipeline/**"
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: pipeline
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: pipeline/uv.lock
+
+      - run: uv sync
+
+      - run: uv run ruff check .
+
+      # TODO: quitar esta tolerancia una vez exista el primer test real.
+      # pytest sale con código 5 cuando no recolecta ningún test.
+      - name: Run tests
+        run: |
+          set +e
+          uv run pytest
+          code=$?
+          set -e
+          if [ $code -eq 5 ]; then
+            echo "No hay tests todavía — tolerado temporalmente."
+            exit 0
+          fi
+          exit $code

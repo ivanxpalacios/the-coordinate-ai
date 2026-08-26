@@ -1,0 +1,16 @@
+services:
+  web:
+    build: ./apps/web
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./apps/web:/app
+      - /app/node_modules
+
+  api:
+    build: ./apps/api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./apps/api:/app
+      - /app/.venv

@@ -416,7 +416,7 @@ Generar vectores e insertar en `knowledge_chunks`. El pipeline debe ser idempote
 - Docker Compose funcionando en local
 - `episodes.json` completo y validado
 - Pipeline de CI básico (lint + tests)
-- COMPLETADA ✅
+- Status: COMPLETADA ✅
 
 ### Fase 1 — Spike de datos
 
@@ -515,3 +515,4 @@ Este proyecto es un vehículo de aprendizaje. La IA asiste, no sustituye.
 | Versión | Fecha | Cambios |
 |---|---|---|
 | 0.1 | 2026-08-21 | Documento inicial de planeación |
+| 0.2 | 2026-08-26 | The scraping was deliberately limited to a subset (the complete first season plus three characters: Eren, Zeke, and Ymir) to validate the labeling before scaling up. |

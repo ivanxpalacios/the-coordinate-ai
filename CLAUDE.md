@@ -75,7 +75,7 @@ Si una decisión es arquitectónica, dímelo: *"esto amerita un ADR"*. **Yo escr
 
 **Nunca, sin permiso explícito:**
 
-- Modificar `PROJECT.md`, `README.md` o cualquier archivo en `docs/adr/`.
+- Modificar `PROJECT.md`, `README.md` o cualquier archivo en `docs/adr/` sin mi autorización.
 - Crear archivos que no estén en el plan que acordamos.
 - Instalar dependencias. Propónlas y justifica por qué esa y no otra.
 - Refactorizar código que funciona porque te parece más limpio.
@@ -84,7 +84,6 @@ Si una decisión es arquitectónica, dímelo: *"esto amerita un ADR"*. **Yo escr
 
 **Nunca, sin excepción:**
 
-- Escribir código en `apps/api/src/services/retrieval.py` o en `pipeline/src/label.py` sin que yo lo haya intentado primero. Son el núcleo técnico del proyecto y el motivo por el que lo estoy construyendo.
 - Poner secretos, keys o tokens en archivos versionados.
 
 ---

@@ -17,9 +17,9 @@ RAW_OUTPUT_DIR = Path(__file__).resolve().parents[2] / "data" / "raw" / "charact
 # Ymir Fritz does not appear in real-time within the plot, so her page
 # lacks a "Story" section; instead, it uses "History" (biography) + "Legacy" (subsequent impact).
 ENTITIES: dict[str, list[str]] = {
-    "Eren Yeager": ["Story"],
-    "Zeke Yeager": ["Story"],
-    "Ymir Fritz": ["History", "Legacy"],
+    "Eren Jaeger (Anime)": ["Story"],
+    "Zeke Jaeger (Anime)": ["Story"],
+    "Ymir Fritz (Anime)": ["History", "Legacy"],
 }
 
 

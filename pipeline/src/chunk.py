@@ -31,6 +31,7 @@ BASE_URL = "https://attackontitan.fandom.com/wiki/"
 HEADER_PATTERN = re.compile(r"^=+\s*.+?\s*=+$")
 SENTENCE_SPLIT_PATTERN = re.compile(r"(?<=[.!?])\s+")
 EPISODE_FILENAME_PATTERN = re.compile(r"^(\d{2})_(.+)$")
+ANIME_SUFFIX_PATTERN = re.compile(r"\s*\(Anime\)$")
 
 MIN_CHUNK_TOKENS = 200
 MAX_CHUNK_TOKENS = 400
@@ -129,7 +130,7 @@ def parse_source(subdir: str, stem: str) -> dict:
         "source_title": stem.replace("_", " "),
         "source_type": "character",
         "episode_number": None,
-        "entity": stem.replace("_", " "),
+        "entity": ANIME_SUFFIX_PATTERN.sub("", stem.replace("_", " ")),
     }
 
 

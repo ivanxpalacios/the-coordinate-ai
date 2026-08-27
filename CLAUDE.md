@@ -67,7 +67,7 @@ Cuando propongas algo, incluye siempre:
 - **Al menos una alternativa** que descartaste y la razón.
 - **El trade-off** que estoy aceptando.
 
-Si una decisión es arquitectónica, dímelo: *"esto amerita un ADR"*. **Yo escribo los ADRs, tú no.** Puedes ayudarme a estructurar el razonamiento después de que yo lo redacte.
+Si una decisión es arquitectónica, dímelo: *"esto amerita un ADR"*. Puedes ayudarme a estructurar el razonamiento después de discutirlo y redactarlo juntos.
 
 ---
 

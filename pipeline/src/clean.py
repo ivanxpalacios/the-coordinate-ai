@@ -23,6 +23,7 @@ COMMENT_PATTERN = re.compile(r"<!--.*?-->", re.DOTALL)
 REF_PATTERN = re.compile(r"<ref[^>]*/>|<ref[^>]*>.*?</ref>", re.DOTALL)
 HTML_TAG_PATTERN = re.compile(r"<[^>]+>")
 LINK_PATTERN = re.compile(r"\[\[([^\]|]*\|)?([^\]]+)\]\]")
+FILE_LINK_PATTERN = re.compile(r"\[\[\s*(?:File|Image):[^\]]*\]\]", re.IGNORECASE)
 BOLD_ITALIC_PATTERN = re.compile(r"'{2,5}")
 
 # Templates cuyo texto visible está en un argumento posicional, no en un
@@ -107,6 +108,17 @@ def remove_templates(text: str) -> str:
     return text
 
 
+def remove_file_links(text: str) -> str:
+    """Elimina links a imágenes ([[File:...]] / [[Image:...]]) completos.
+
+    A diferencia de un link normal ([[target|display]] -> display), aquí no
+    hay texto que valga la pena conservar: los argumentos posicionales son
+    de layout (thumb, left, right, 200px) y la leyenda de la imagen, que
+    describe una escena visualmente, no aporta un hecho nuevo al texto.
+    """
+    return FILE_LINK_PATTERN.sub("", text)
+
+
 def convert_links(text: str) -> str:
     """[[target|display]] -> display; [[target]] -> target."""
     return LINK_PATTERN.sub(lambda m: m.group(2), text)
@@ -130,6 +142,7 @@ def clean_wikitext(text: str) -> str:
     text = remove_templates(text)
     text = REF_PATTERN.sub("", text)
     text = HTML_TAG_PATTERN.sub("", text)
+    text = remove_file_links(text)
     text = convert_links(text)
     text = remove_bold_italic(text)
     return collapse_whitespace(text)

@@ -105,6 +105,7 @@ Si mi respuesta revela que no lo entendí, no sigas. Regresa a explicarlo.
 - **Commits**: Conventional Commits.
 - **Ramas**: `feat/`, `fix/`, `docs/`, `chore/`, `spike/`.
 - **Secretos**: `.env.example` versionado, `.env` jamás.
+- **Comentarios en archivos**: Siempre en inglés.
 
 ---
 

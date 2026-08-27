@@ -38,7 +38,9 @@ TOKENS_PER_WORD = 1.3
 
 
 def estimate_tokens(text: str) -> int:
-    """Approach without an actual tokenizer: avoiding commitment to a model that has not yet been selected (D-01/D-02)."""
+    """Approach without an actual tokenizer: avoiding commitment to a model that
+    has not yet been selected (D-01/D-02).
+    """
     return round(len(text.split()) * TOKENS_PER_WORD)
 
 

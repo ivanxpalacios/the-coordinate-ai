@@ -1,22 +1,22 @@
-"""Divide texto plano procesado en chunks semánticos, con metadata de origen.
+"""Splits processed plain text into semantic chunks, including source metadata.
 
-Estrategia de dos pasadas para acercarse al rango objetivo de 200-400 tokens
-(PROJECT.md, Fase 4) sin cortar por conteo fijo de caracteres:
+A two-pass strategy to approach the target range of 200–400 tokens
+(PROJECT.md, Phase 4) without splitting based on a fixed character count:
 
-1. Los párrafos que exceden MAX_CHUNK_TOKENS se subdividen agrupando oraciones
-   consecutivas (split_oversized_paragraph).
-2. Las unidades resultantes que quedan por debajo de MIN_CHUNK_TOKENS se
-   fusionan con las siguientes hasta alcanzar el mínimo (merge_undersized_units).
+1. Paragraphs exceeding MAX_CHUNK_TOKENS are subdivided by grouping
+consecutive sentences (split_oversized_paragraph).
+2. Resulting units falling below MIN_CHUNK_TOKENS are merged with
+subsequent units until the minimum is reached (merge_undersized_units).
 
-Limitaciones conocidas, aceptables para el spike (se auditan en la revisión
-manual de Fase 5, paso 3):
-- El split de oraciones es un regex simple sobre '. ! ?'; falla con
-  abreviaciones ("Mr.", "Dr.").
-- Si una sola oración supera MAX_CHUNK_TOKENS, no se subdivide más.
-- No hay un archivo de metadata separado del scraper: source_url y
-  source_title se reconstruyen a partir del nombre de archivo, que ya
-  codifica el título de la página de MediaWiki (ver title_to_page_name en
-  mediawiki_client.py).
+Known limitations, acceptable for the spike (to be audited during the
+manual review in Phase 5, step 3):
+- Sentence splitting relies on a simple regex using '. ! ?'; it fails with
+abbreviations (e.g., "Mr.", "Dr.").
+- If a single sentence exceeds MAX_CHUNK_TOKENS, it is not subdivided further.
+- There is no metadata file separate from the scraper; source_url and
+source_title are reconstructed from the filename, which already
+encodes the MediaWiki page title (see title_to_page_name in
+mediawiki_client.py).
 """
 
 import json
@@ -38,12 +38,12 @@ TOKENS_PER_WORD = 1.3
 
 
 def estimate_tokens(text: str) -> int:
-    """Aproximación sin tokenizer real: no atarse a un modelo aún no elegido (D-01/D-02)."""
+    """Approach without an actual tokenizer: avoiding commitment to a model that has not yet been selected (D-01/D-02)."""
     return round(len(text.split()) * TOKENS_PER_WORD)
 
 
 def split_into_paragraphs(text: str) -> list[str]:
-    """Separa por líneas en blanco, descartando líneas de header sueltas."""
+    """Separate by blank lines, discarding stray header lines."""
     paragraphs = []
     for block in text.split("\n\n"):
         lines = [line for line in block.splitlines() if not HEADER_PATTERN.match(line.strip())]
@@ -110,7 +110,7 @@ def chunk_text(text: str) -> list[str]:
 
 
 def parse_source(subdir: str, stem: str) -> dict:
-    """Reconstruye source_url/source_title/entidad a partir del nombre de archivo."""
+    """Reconstructs source_url/source_title/entity from the filename."""
     if subdir == "episodes":
         match = EPISODE_FILENAME_PATTERN.match(stem)
         slug = match.group(2)

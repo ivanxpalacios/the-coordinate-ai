@@ -1,4 +1,4 @@
-"""Descarga wikitext de episodios de temporada 1 desde la API de MediaWiki de Fandom."""
+"""Download season 1 episode wikitext from Fandom's MediaWiki API."""
 
 import json
 from pathlib import Path

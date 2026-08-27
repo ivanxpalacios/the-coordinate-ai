@@ -1,6 +1,6 @@
-"""Cliente HTTP compartido hacia la API de MediaWiki de Fandom.
+"""Shared HTTP client for the Fandom MediaWiki API.
 
-Fuente y justificación: docs/adr/0002-source-of-scraping-api-mediawiki.md
+Source and rationale: docs/adr/0002-source-of-scraping-api-mediawiki.md
 """
 
 import time

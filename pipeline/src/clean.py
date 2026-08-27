@@ -1,16 +1,16 @@
-"""Limpia wikitext crudo y lo convierte a texto plano estructurado.
+"""Cleans raw wikitext and converts it into structured plain text.
 
-Quita templates ({{...}}), referencias (<ref>...</ref>), tags HTML,
-comentarios y markup de enlaces/negritas, dejando prosa legible para
-el chunking.
+Removes templates ({{...}}), references (<ref>...</ref>), HTML tags,
+comments, and link/bolding markup, leaving behind prose suitable
+for chunking.
 
-Limitación conocida: solo los templates listados en CONTENT_TEMPLATE_ARG
-(nihongo, w) conservan su texto visible antes de que el resto de
-templates se eliminen por completo. Si aparece otro template que también
-envuelva prosa (no un campo estructurado tipo Infobox), hay que agregarlo
-a esa lista; mientras tanto se pierde su contenido. Para el spike esto es
-aceptable porque la revisión manual (Fase 5, paso 3 de PROJECT.md) audita
-el resultado.
+Known limitation: only the templates listed in CONTENT_TEMPLATE_ARG
+(nihongo, w) retain their visible text before the remaining
+templates are completely removed. If another template containing
+prose (rather than a structured field like an Infobox) appears,
+it must be added to that list; otherwise, its content is lost.
+For this spike, this is acceptable because the manual review
+(Phase 5, step 3 of PROJECT.md) audits the result.
 """
 
 import re
@@ -26,19 +26,19 @@ LINK_PATTERN = re.compile(r"\[\[([^\]|]*\|)?([^\]]+)\]\]")
 FILE_LINK_PATTERN = re.compile(r"\[\[\s*(?:File|Image):[^\]]*\]\]", re.IGNORECASE)
 BOLD_ITALIC_PATTERN = re.compile(r"'{2,5}")
 
-# Templates cuyo texto visible está en un argumento posicional, no en un
-# campo estructurado (a diferencia de {{Infobox episode | Season = 1 | ...}}).
-# "first": el texto visible es el primer argumento, p. ej.
+# Templates where the visible text is in a positional argument, not in a
+# structured field (unlike {{Infobox episode | Season = 1 | ...}}).
+# "first": the visible text is the first argument, e.g.
 #   {{nihongo|'''To You...'''|漢字|romaji}} -> '''To You...'''
-# "last": el texto visible es el último argumento si hay más de uno
-#   (como [[target|display]]), o el único argumento si solo hay uno:
+# "last": the visible text is the last argument if there is more than one
+#   (like [[target|display]]), or the only argument if there is just one:
 #   {{w|Tetsurō Araki}} -> Tetsurō Araki
 #   {{w|Sabu (director)|Hiroyuki Tanaka}} -> Hiroyuki Tanaka
 CONTENT_TEMPLATE_ARG = {"nihongo": "first", "w": "last"}
 
-# Secciones que se descartan por completo (encabezado y contenido), por nombre
-# exacto. Se quitan por consistencia y porque secciones como "Trivia" suelen
-# referenciar episodios futuros (spoilers).
+# Sections to be completely discarded (heading and content), by exact name.
+# They are removed for consistency and because sections like "Trivia" often
+# reference future episodes (spoilers).
 SECTIONS_TO_REMOVE = {
     "Characters in order of appearance",
     "Cast",
@@ -55,7 +55,7 @@ def remove_comments(text: str) -> str:
 
 
 def expand_named_templates(text: str) -> str:
-    """Sustituye templates con contenido por su argumento de texto visible."""
+    """Replaces templates containing content with their visible text argument."""
     for name, which_arg in CONTENT_TEMPLATE_ARG.items():
         pattern = re.compile(r"\{\{\s*" + re.escape(name) + r"\s*\|([^{}]*)\}\}")
 
@@ -68,10 +68,10 @@ def expand_named_templates(text: str) -> str:
 
 
 def remove_sections(text: str) -> str:
-    """Descarta las secciones listadas en SECTIONS_TO_REMOVE, con su contenido.
+    """Discard the sections listed in SECTIONS_TO_REMOVE, along with their content. 
 
-    Al quitar una sección de nivel N, también se descartan sus subsecciones
-    (nivel > N), deteniéndose en el siguiente header de nivel <= N.
+    Removing a section at level N also discards its subsections
+    (level > N), stopping at the next header with a level <= N.
     """
     lines = text.splitlines()
     result = []
@@ -94,11 +94,11 @@ def remove_sections(text: str) -> str:
 
 
 def remove_templates(text: str) -> str:
-    """Elimina templates {{...}}, incluyendo los anidados.
+    """Removes {{...}} templates, including nested ones. 
 
-    Quita repetidamente los templates "más internos" (sin '{{' dentro)
-    hasta que no quede ninguno, para manejar anidación como
-    {{nihongo|'''texto'''|{{w|kanji}}}}.
+    Repeatedly removes the "innermost" templates (those with no '{{' inside)
+    until none remain, in order to handle nesting such as
+    {{nihongo|'''text'''|{{w|kanji}}}}.
     """
     innermost_template = re.compile(r"\{\{[^{}]*\}\}")
     previous = None
@@ -109,12 +109,12 @@ def remove_templates(text: str) -> str:
 
 
 def remove_file_links(text: str) -> str:
-    """Elimina links a imágenes ([[File:...]] / [[Image:...]]) completos.
+    """Removes complete image links ([[File:...]] / [[Image:...]]). 
 
-    A diferencia de un link normal ([[target|display]] -> display), aquí no
-    hay texto que valga la pena conservar: los argumentos posicionales son
-    de layout (thumb, left, right, 200px) y la leyenda de la imagen, que
-    describe una escena visualmente, no aporta un hecho nuevo al texto.
+    Unlike a standard link ([[target|display]] -> display), there is no
+    text here worth preserving: the positional arguments relate to
+    layout (thumb, left, right, 200px), and the image caption—which
+    describes a visual scene—adds no new factual information to the text.
     """
     return FILE_LINK_PATTERN.sub("", text)
 

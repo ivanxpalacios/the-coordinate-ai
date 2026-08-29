@@ -476,7 +476,7 @@ Generar vectores e insertar en `knowledge_chunks`. El pipeline debe ser idempote
 |---|---|---|
 | D-01 | Proveedor de LLM | Resuelta — Groq (ver ADR-0006) |
 | D-02 | Embeddings locales vs. API | Resuelta — locales primero, `all-MiniLM-L6-v2` (ver ADR-0006) |
-| D-03 | Plataforma de hosting para la API | Pendiente — validar free tiers de contenedores vigentes |
+| D-03 | Plataforma de hosting para la API | Resuelta — Oracle Cloud Always Free + Neon (ver ADR-0007) |
 | D-04 | Framework de RAG (LangChain / LlamaIndex / implementación propia) | Pendiente — **inclinación: implementación propia, por valor de aprendizaje** |
 | D-05 | Idioma del MVP | Pendiente |
 | D-06 | Fuente exacta del scraping y alcance | Pendiente |

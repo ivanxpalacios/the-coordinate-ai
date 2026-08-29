@@ -19,7 +19,7 @@ def title_to_page_name(title: str) -> str:
     return title.replace(" ", "_")
 
 
-def fetch_wikitext(title: str) -> str:
+def _request_wikitext(title: str) -> str:
     page_name = title_to_page_name(title)
     params = {
         "action": "parse",
@@ -37,3 +37,22 @@ def fetch_wikitext(title: str) -> str:
 
     time.sleep(REQUEST_DELAY_SECONDS)
     return payload["parse"]["wikitext"]["*"]
+
+
+def fetch_wikitext(title: str) -> str:
+    """Fetches a page's wikitext, retrying once with a "(Episode)" suffix if the
+    bare title turns out to belong to something else on this wiki.
+
+    Some titles collide with a manga chapter of the same name: the bare title
+    either doesn't exist (missingtitle error) or is itself a redirect to the
+    chapter page (wikitext starting with "#REDIRECT"), and the real episode
+    article lives at "{title} (Episode)" instead.
+    """
+    try:
+        wikitext = _request_wikitext(title)
+    except RuntimeError:
+        return _request_wikitext(f"{title} (Episode)")
+
+    if wikitext.startswith("#REDIRECT"):
+        return _request_wikitext(f"{title} (Episode)")
+    return wikitext

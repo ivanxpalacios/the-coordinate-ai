@@ -30,8 +30,9 @@ def scrape_season(season: int) -> None:
             print(f"[skip] {path.name} ya existe")
             continue
 
-        print(f"[fetch] {episode['title']}")
-        wikitext = fetch_wikitext(episode["title"])
+        wiki_title = episode.get("wiki_title", episode["title"])
+        print(f"[fetch] {wiki_title}")
+        wikitext = fetch_wikitext(wiki_title)
         path.write_text(wikitext, encoding="utf-8")
 
 

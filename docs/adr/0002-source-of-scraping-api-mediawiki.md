@@ -29,3 +29,11 @@ August 26th, 2026.
 ## 7. Author
 
 Iván Palacios Martínez
+
+## 8. Amendment (2026-08-29): title collisions with manga chapter pages
+
+While scraping episodes 26-89, 54 of the 89 episode titles turned out to collide with a manga chapter of the same name on this wiki. In that case the bare title belongs to the chapter, not the episode: the API either returns a `missingtitle` error or, more insidiously, silently returns a one-line `#REDIRECT [[Title (Chapter)]]` stub as if it were valid wikitext — this second case does not raise an error and was initially missed, producing 54 chunk files whose entire content was that redirect stub instead of the actual episode narration.
+
+The real episode article lives at `"{title} (Episode)"` in every one of these 54 cases. `mediawiki_client.fetch_wikitext` now retries once with that suffix whenever the initial request either raises a `missingtitle` error or returns wikitext starting with `#REDIRECT`, before giving up.
+
+One further exception did not fit even that pattern: episode 57 ("That Day") collides with another episode (episode 2), not a chapter, and the wiki disambiguates it as `"That Day (Episode 57)"` rather than the generic `"(Episode)"` suffix. Since this is a title shared between two episodes — not expected to recur — it is handled with a manual `wiki_title` override field in `episodes.json`, read by `scrape_episodes.py` in place of `title` when present, rather than generalizing the client's fallback to a second, number-based suffix for a single occurrence.

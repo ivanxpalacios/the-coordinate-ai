@@ -67,7 +67,7 @@ Cuando propongas algo, incluye siempre:
 - **Al menos una alternativa** que descartaste y la razón.
 - **El trade-off** que estoy aceptando.
 
-Si una decisión es arquitectónica, dímelo: *"esto amerita un ADR"*. **Yo escribo los ADRs, tú no.** Puedes ayudarme a estructurar el razonamiento después de que yo lo redacte.
+Si una decisión es arquitectónica, dímelo: *"esto amerita un ADR"*. Puedes ayudarme a estructurar el razonamiento después de discutirlo y redactarlo juntos.
 
 ---
 
@@ -75,7 +75,7 @@ Si una decisión es arquitectónica, dímelo: *"esto amerita un ADR"*. **Yo escr
 
 **Nunca, sin permiso explícito:**
 
-- Modificar `PROJECT.md`, `README.md` o cualquier archivo en `docs/adr/`.
+- Modificar `PROJECT.md`, `README.md` o cualquier archivo en `docs/adr/` sin mi autorización.
 - Crear archivos que no estén en el plan que acordamos.
 - Instalar dependencias. Propónlas y justifica por qué esa y no otra.
 - Refactorizar código que funciona porque te parece más limpio.
@@ -84,7 +84,6 @@ Si una decisión es arquitectónica, dímelo: *"esto amerita un ADR"*. **Yo escr
 
 **Nunca, sin excepción:**
 
-- Escribir código en `apps/api/src/services/retrieval.py` o en `pipeline/src/label.py` sin que yo lo haya intentado primero. Son el núcleo técnico del proyecto y el motivo por el que lo estoy construyendo.
 - Poner secretos, keys o tokens en archivos versionados.
 
 ---
@@ -105,6 +104,7 @@ Si mi respuesta revela que no lo entendí, no sigas. Regresa a explicarlo.
 - **Commits**: Conventional Commits.
 - **Ramas**: `feat/`, `fix/`, `docs/`, `chore/`, `spike/`.
 - **Secretos**: `.env.example` versionado, `.env` jamás.
+- **Comentarios en archivos, asistencia en ADRs, etcétera**: Siempre en inglés.
 
 ---
 

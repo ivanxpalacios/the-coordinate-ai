@@ -259,7 +259,9 @@ the-coordinate-ai/
 ├── pipeline/                         # ETL en Python, se corre offline
 │   ├── pyproject.toml
 │   ├── src/
-│   │   ├── scrape.py
+│   │   ├── mediawiki_client.py       # cliente HTTP compartido hacia la API de MediaWiki
+│   │   ├── scrape_episodes.py        # descarga páginas de episodio (por temporada)
+│   │   ├── scrape_characters.py      # descarga páginas de entidad, corta por sección
 │   │   ├── clean.py
 │   │   ├── chunk.py
 │   │   ├── label.py                  # ⭐ asigna reveal_episode
@@ -414,7 +416,7 @@ Generar vectores e insertar en `knowledge_chunks`. El pipeline debe ser idempote
 - Docker Compose funcionando en local
 - `episodes.json` completo y validado
 - Pipeline de CI básico (lint + tests)
-- COMPLETADA ✅
+- Status: COMPLETADA ✅
 
 ### Fase 1 — Spike de datos
 
@@ -472,12 +474,12 @@ Generar vectores e insertar en `knowledge_chunks`. El pipeline debe ser idempote
 
 | ID | Decisión | Estado |
 |---|---|---|
-| D-01 | Proveedor de LLM | Pendiente — **validar free tiers vigentes antes de comprometerse** |
-| D-02 | Embeddings locales vs. API | Pendiente — depende del límite de RAM del hosting |
-| D-03 | Plataforma de hosting para la API | Pendiente — validar free tiers de contenedores vigentes |
-| D-04 | Framework de RAG (LangChain / LlamaIndex / implementación propia) | Pendiente — **inclinación: implementación propia, por valor de aprendizaje** |
-| D-05 | Idioma del MVP | Pendiente |
-| D-06 | Fuente exacta del scraping y alcance | Pendiente |
+| D-01 | Proveedor de LLM | Resuelta — Groq (ver ADR-0006) |
+| D-02 | Embeddings locales vs. API | Resuelta — locales primero, `all-MiniLM-L6-v2` (ver ADR-0006) |
+| D-03 | Plataforma de hosting para la API | Resuelta — Oracle Cloud Always Free + Neon (ver ADR-0007) |
+| D-04 | Framework de RAG (LangChain / LlamaIndex / implementación propia) | Resuelta — implementación propia, por valor de aprendizaje |
+| D-05 | Idioma del MVP | Resuelta — inglés |
+| D-06 | Fuente exacta del scraping y alcance | Resuelta — 4 temporadas completas en episodios; personajes limitados al pilot (ver ADR-0008) |
 
 > **Nota importante sobre D-01 y D-03:** los free tiers de proveedores cloud y de APIs de IA cambian con frecuencia. Verificar disponibilidad y límites actuales antes de fijar la decisión, y registrarla como ADR.
 
@@ -513,3 +515,4 @@ Este proyecto es un vehículo de aprendizaje. La IA asiste, no sustituye.
 | Versión | Fecha | Cambios |
 |---|---|---|
 | 0.1 | 2026-08-21 | Documento inicial de planeación |
+| 0.2 | 2026-08-26 | The scraping was deliberately limited to a subset (the complete first season plus three characters: Eren, Zeke, and Ymir) to validate the labeling before scaling up. |

@@ -474,8 +474,8 @@ Generar vectores e insertar en `knowledge_chunks`. El pipeline debe ser idempote
 
 | ID | Decisión | Estado |
 |---|---|---|
-| D-01 | Proveedor de LLM | Pendiente — **validar free tiers vigentes antes de comprometerse** |
-| D-02 | Embeddings locales vs. API | Pendiente — depende del límite de RAM del hosting |
+| D-01 | Proveedor de LLM | Resuelta — Groq (ver ADR-0006) |
+| D-02 | Embeddings locales vs. API | Resuelta — locales primero, `all-MiniLM-L6-v2` (ver ADR-0006) |
 | D-03 | Plataforma de hosting para la API | Pendiente — validar free tiers de contenedores vigentes |
 | D-04 | Framework de RAG (LangChain / LlamaIndex / implementación propia) | Pendiente — **inclinación: implementación propia, por valor de aprendizaje** |
 | D-05 | Idioma del MVP | Pendiente |

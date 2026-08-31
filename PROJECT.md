@@ -4,9 +4,9 @@
 
 | Campo | Valor |
 |---|---|
-| **Versión del documento** | 0.1 (Draft) |
-| **Fecha** | 2026-08-21 |
-| **Estado** | Planeación / Discovery |
+| **Versión del documento** | 0.3 |
+| **Fecha** | 2026-08-31 |
+| **Estado** | En desarrollo — pipeline de datos completo |
 | **Tipo** | Proyecto fanmade, no comercial, de portafolio |
 
 ---
@@ -423,13 +423,15 @@ Generar vectores e insertar en `knowledge_chunks`. El pipeline debe ser idempote
 - Scraping de un subset acotado (temporada 1)
 - Prototipo del etiquetador de `reveal_episode`
 - **Criterio de salida:** validación manual de 50 chunks con ≥90 % de precisión en el etiquetado
+- Status: COMPLETADA ✅ (ver ADR-0004)
 
 ### Fase 2 — Núcleo RAG
 
-- Ingesta a pgvector
 - Endpoint de búsqueda con filtrado por episodio
 - Integración con el proveedor LLM
 - Suite de tests adversariales inicial
+
+> Nota: la ingesta a pgvector se adelantó y se hizo como parte del pipeline de datos (sección 10, Fase 6) — no como parte de este bloque.
 
 ### Fase 3 — Frontend
 
@@ -447,6 +449,7 @@ Generar vectores e insertar en `knowledge_chunks`. El pipeline debe ser idempote
 
 - Scraping completo de las 4 temporadas
 - Auditoría de etiquetado ampliada
+- Status: COMPLETADA ✅ (ver ADR-0008; episodios 26-89 y personajes Eren/Zeke/Ymir etiquetados)
 
 ### Fase 6 — Producción
 
@@ -516,3 +519,4 @@ Este proyecto es un vehículo de aprendizaje. La IA asiste, no sustituye.
 |---|---|---|
 | 0.1 | 2026-08-21 | Documento inicial de planeación |
 | 0.2 | 2026-08-26 | The scraping was deliberately limited to a subset (the complete first season plus three characters: Eren, Zeke, and Ymir) to validate the labeling before scaling up. |
+| 0.3 | 2026-08-31 | Pipeline de datos completo de punta a punta: scraping y etiquetado de las 4 temporadas (episodios 1-89) y los 3 personajes en alcance, esquema de `knowledge_chunks` creado en Neon/pgvector, embeddings generados con `all-MiniLM-L6-v2`, y los ~786 chunks ingeridos. Fases 1 y 5 del roadmap cerradas; la ingesta a pgvector se adelantó desde la Fase 2. |

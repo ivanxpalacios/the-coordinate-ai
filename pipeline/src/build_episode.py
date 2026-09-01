@@ -14,6 +14,7 @@ class Episode(BaseModel):
     season: int
     episode_in_season: int
     title: str
+    wiki_title: str | None = None
     arc: str
     manga_chapters: list[int]
 
@@ -21,6 +22,11 @@ class Episode(BaseModel):
     @classmethod
     def split_manga_chapters(cls, value: str) -> list[str]:
         return value.split("|")
+
+    @field_validator("wiki_title", mode="before")
+    @classmethod
+    def blank_wiki_title_to_none(cls, value: str | None) -> str | None:
+        return value or None
 
 
 def load_rows(csv_path: Path) -> list[dict[str, str]]:

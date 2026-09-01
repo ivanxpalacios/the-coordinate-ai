@@ -4,6 +4,7 @@
     "season": 1,
     "episode_in_season": 1,
     "title": "To You, in 2000 Years: The Fall of Shiganshina, Part 1",
+    "wiki_title": null,
     "arc": "Fall of Shiganshina Arc",
     "manga_chapters": [
       1
@@ -14,6 +15,7 @@
     "season": 1,
     "episode_in_season": 2,
     "title": "That Day: The Fall of Shiganshina, Part 2",
+    "wiki_title": null,
     "arc": "Fall of Shiganshina Arc",
     "manga_chapters": [
       2,
@@ -26,6 +28,7 @@
     "season": 1,
     "episode_in_season": 3,
     "title": "A Dim Light Amid Despair: Humanity's Comeback, Part 1",
+    "wiki_title": null,
     "arc": "104th Training Corps Arc",
     "manga_chapters": [
       15,
@@ -37,6 +40,7 @@
     "season": 1,
     "episode_in_season": 4,
     "title": "The Night of the Closing Ceremony: Humanity's Comeback, Part 2",
+    "wiki_title": null,
     "arc": "104th Training Corps Arc",
     "manga_chapters": [
       2,
@@ -49,6 +53,7 @@
     "season": 1,
     "episode_in_season": 5,
     "title": "First Battle: The Struggle for Trost, Part 1",
+    "wiki_title": null,
     "arc": "Battle of Trost District Arc",
     "manga_chapters": [
       4
@@ -59,6 +64,7 @@
     "season": 1,
     "episode_in_season": 6,
     "title": "The World the Girl Saw: The Struggle for Trost, Part 2",
+    "wiki_title": null,
     "arc": "Battle of Trost District Arc",
     "manga_chapters": [
       5,
@@ -70,6 +76,7 @@
     "season": 1,
     "episode_in_season": 7,
     "title": "Small Blade: The Struggle for Trost, Part 3",
+    "wiki_title": null,
     "arc": "Battle of Trost District Arc",
     "manga_chapters": [
       7,
@@ -81,6 +88,7 @@
     "season": 1,
     "episode_in_season": 8,
     "title": "I Can Hear His Heartbeat: The Struggle for Trost, Part 4",
+    "wiki_title": null,
     "arc": "Battle of Trost District Arc",
     "manga_chapters": [
       8,
@@ -92,6 +100,7 @@
     "season": 1,
     "episode_in_season": 9,
     "title": "Whereabouts of His Left Arm: The Struggle for Trost, Part 5",
+    "wiki_title": null,
     "arc": "Battle of Trost District Arc",
     "manga_chapters": [
       10
@@ -102,6 +111,7 @@
     "season": 1,
     "episode_in_season": 10,
     "title": "Response: The Struggle for Trost, Part 6",
+    "wiki_title": null,
     "arc": "Battle of Trost District Arc",
     "manga_chapters": [
       11,
@@ -113,6 +123,7 @@
     "season": 1,
     "episode_in_season": 11,
     "title": "Idol: The Struggle for Trost, Part 7",
+    "wiki_title": null,
     "arc": "Battle of Trost District Arc",
     "manga_chapters": [
       12
@@ -123,6 +134,7 @@
     "season": 1,
     "episode_in_season": 12,
     "title": "Wound: The Struggle for Trost, Part 8",
+    "wiki_title": null,
     "arc": "Battle of Trost District Arc",
     "manga_chapters": [
       13,
@@ -134,6 +146,7 @@
     "season": 1,
     "episode_in_season": 13,
     "title": "Primal Desire: The Struggle for Trost, Part 9",
+    "wiki_title": null,
     "arc": "Battle of Trost District Arc",
     "manga_chapters": [
       14,
@@ -145,6 +158,7 @@
     "season": 1,
     "episode_in_season": 14,
     "title": "Can't Look into His Eyes Yet: Eve of the Counterattack, Part 1",
+    "wiki_title": null,
     "arc": "Female Titan Arc",
     "manga_chapters": [
       19
@@ -155,6 +169,7 @@
     "season": 1,
     "episode_in_season": 15,
     "title": "Special Operations Squad: Eve of the Counterattack, Part 2",
+    "wiki_title": null,
     "arc": "Female Titan Arc",
     "manga_chapters": [
       20
@@ -165,6 +180,7 @@
     "season": 1,
     "episode_in_season": 16,
     "title": "What Needs to be Done Now: Eve of the Counterattack, Part 3",
+    "wiki_title": null,
     "arc": "Female Titan Arc",
     "manga_chapters": [
       18,
@@ -177,6 +193,7 @@
     "season": 1,
     "episode_in_season": 17,
     "title": "Female Titan: The 57th Exterior Scouting Mission, Part 1",
+    "wiki_title": null,
     "arc": "Female Titan Arc",
     "manga_chapters": [
       22,
@@ -188,6 +205,7 @@
     "season": 1,
     "episode_in_season": 18,
     "title": "Forest of Giant Trees: The 57th Exterior Scouting Mission, Part 2",
+    "wiki_title": null,
     "arc": "Female Titan Arc",
     "manga_chapters": [
       24,
@@ -199,6 +217,7 @@
     "season": 1,
     "episode_in_season": 19,
     "title": "Bite: The 57th Exterior Scouting Mission, Part 3",
+    "wiki_title": null,
     "arc": "Female Titan Arc",
     "manga_chapters": [
       25,
@@ -210,6 +229,7 @@
     "season": 1,
     "episode_in_season": 20,
     "title": "Erwin Smith: The 57th Exterior Scouting Mission, Part 4",
+    "wiki_title": null,
     "arc": "Female Titan Arc",
     "manga_chapters": [
       27,
@@ -221,6 +241,7 @@
     "season": 1,
     "episode_in_season": 21,
     "title": "Crushing Blow: The 57th Exterior Scouting Mission, Part 5",
+    "wiki_title": null,
     "arc": "Female Titan Arc",
     "manga_chapters": [
       28,
@@ -233,6 +254,7 @@
     "season": 1,
     "episode_in_season": 22,
     "title": "The Defeated: The 57th Exterior Scouting Mission, Part 6",
+    "wiki_title": null,
     "arc": "Female Titan Arc",
     "manga_chapters": [
       30
@@ -243,6 +265,7 @@
     "season": 1,
     "episode_in_season": 23,
     "title": "Smile: Assault on Stohess, Part 1",
+    "wiki_title": null,
     "arc": "Female Titan Arc",
     "manga_chapters": [
       31,
@@ -254,6 +277,7 @@
     "season": 1,
     "episode_in_season": 24,
     "title": "Mercy: Assault on Stohess, Part 2",
+    "wiki_title": null,
     "arc": "Female Titan Arc",
     "manga_chapters": [
       32
@@ -264,6 +288,7 @@
     "season": 1,
     "episode_in_season": 25,
     "title": "Wall: Assault on Stohess, Part 3",
+    "wiki_title": null,
     "arc": "Female Titan Arc",
     "manga_chapters": [
       33,
@@ -275,6 +300,7 @@
     "season": 2,
     "episode_in_season": 1,
     "title": "Beast Titan",
+    "wiki_title": "Beast Titan (Episode)",
     "arc": "Clash of the Titans Arc",
     "manga_chapters": [
       34,
@@ -286,6 +312,7 @@
     "season": 2,
     "episode_in_season": 2,
     "title": "I'm Home",
+    "wiki_title": null,
     "arc": "Clash of the Titans Arc",
     "manga_chapters": [
       36,
@@ -297,6 +324,7 @@
     "season": 2,
     "episode_in_season": 3,
     "title": "Southwestward",
+    "wiki_title": null,
     "arc": "Clash of the Titans Arc",
     "manga_chapters": [
       37,
@@ -308,6 +336,7 @@
     "season": 2,
     "episode_in_season": 4,
     "title": "Soldier",
+    "wiki_title": null,
     "arc": "Clash of the Titans Arc",
     "manga_chapters": [
       38,
@@ -320,6 +349,7 @@
     "season": 2,
     "episode_in_season": 5,
     "title": "Historia",
+    "wiki_title": null,
     "arc": "Clash of the Titans Arc",
     "manga_chapters": [
       40,
@@ -331,6 +361,7 @@
     "season": 2,
     "episode_in_season": 6,
     "title": "Warrior",
+    "wiki_title": null,
     "arc": "Clash of the Titans Arc",
     "manga_chapters": [
       42
@@ -341,6 +372,7 @@
     "season": 2,
     "episode_in_season": 7,
     "title": "Close Combat",
+    "wiki_title": null,
     "arc": "Clash of the Titans Arc",
     "manga_chapters": [
       43,
@@ -353,6 +385,7 @@
     "season": 2,
     "episode_in_season": 8,
     "title": "The Hunters",
+    "wiki_title": null,
     "arc": "Clash of the Titans Arc",
     "manga_chapters": [
       45
@@ -363,6 +396,7 @@
     "season": 2,
     "episode_in_season": 9,
     "title": "Opening",
+    "wiki_title": null,
     "arc": "Clash of the Titans Arc",
     "manga_chapters": [
       46,
@@ -374,6 +408,7 @@
     "season": 2,
     "episode_in_season": 10,
     "title": "Children",
+    "wiki_title": null,
     "arc": "Clash of the Titans Arc",
     "manga_chapters": [
       47
@@ -384,6 +419,7 @@
     "season": 2,
     "episode_in_season": 11,
     "title": "Charge",
+    "wiki_title": null,
     "arc": "Clash of the Titans Arc",
     "manga_chapters": [
       48,
@@ -395,6 +431,7 @@
     "season": 2,
     "episode_in_season": 12,
     "title": "Scream",
+    "wiki_title": null,
     "arc": "Clash of the Titans Arc",
     "manga_chapters": [
       49,
@@ -407,6 +444,7 @@
     "season": 3,
     "episode_in_season": 1,
     "title": "Smoke Signal",
+    "wiki_title": null,
     "arc": "Royal Government Arc",
     "manga_chapters": [
       51,
@@ -421,6 +459,7 @@
     "season": 3,
     "episode_in_season": 2,
     "title": "Pain",
+    "wiki_title": null,
     "arc": "Royal Government Arc",
     "manga_chapters": [
       53,
@@ -437,6 +476,7 @@
     "season": 3,
     "episode_in_season": 3,
     "title": "Old Story",
+    "wiki_title": null,
     "arc": "Royal Government Arc",
     "manga_chapters": [
       52,
@@ -451,6 +491,7 @@
     "season": 3,
     "episode_in_season": 4,
     "title": "Trust",
+    "wiki_title": null,
     "arc": "Royal Government Arc",
     "manga_chapters": [
       57,
@@ -464,6 +505,7 @@
     "season": 3,
     "episode_in_season": 5,
     "title": "Reply",
+    "wiki_title": null,
     "arc": "Royal Government Arc",
     "manga_chapters": [
       53,
@@ -476,6 +518,7 @@
     "season": 3,
     "episode_in_season": 6,
     "title": "Sin",
+    "wiki_title": null,
     "arc": "Royal Government Arc",
     "manga_chapters": [
       54,
@@ -490,6 +533,7 @@
     "season": 3,
     "episode_in_season": 7,
     "title": "Wish",
+    "wiki_title": null,
     "arc": "Royal Government Arc",
     "manga_chapters": [
       63,
@@ -503,6 +547,7 @@
     "season": 3,
     "episode_in_season": 8,
     "title": "Outside the Walls of Orvud District",
+    "wiki_title": null,
     "arc": "Royal Government Arc",
     "manga_chapters": [
       66,
@@ -514,6 +559,7 @@
     "season": 3,
     "episode_in_season": 9,
     "title": "Ruler of the Walls",
+    "wiki_title": null,
     "arc": "Royal Government Arc",
     "manga_chapters": [
       67,
@@ -526,6 +572,7 @@
     "season": 3,
     "episode_in_season": 10,
     "title": "Friends",
+    "wiki_title": null,
     "arc": "Royal Government Arc",
     "manga_chapters": [
       69,
@@ -537,6 +584,7 @@
     "season": 3,
     "episode_in_season": 11,
     "title": "Bystander",
+    "wiki_title": null,
     "arc": "Royal Government Arc",
     "manga_chapters": [
       70,
@@ -548,6 +596,7 @@
     "season": 3,
     "episode_in_season": 12,
     "title": "Night of the Battle to Retake the Wall",
+    "wiki_title": null,
     "arc": "Royal Government Arc",
     "manga_chapters": [
       70,
@@ -559,6 +608,7 @@
     "season": 3,
     "episode_in_season": 13,
     "title": "The Town Where Everything Began",
+    "wiki_title": null,
     "arc": "Return to Shiganshina Arc",
     "manga_chapters": [
       73,
@@ -570,6 +620,7 @@
     "season": 3,
     "episode_in_season": 14,
     "title": "Thunder Spears",
+    "wiki_title": null,
     "arc": "Return to Shiganshina Arc",
     "manga_chapters": [
       75,
@@ -581,6 +632,7 @@
     "season": 3,
     "episode_in_season": 15,
     "title": "Descent",
+    "wiki_title": null,
     "arc": "Return to Shiganshina Arc",
     "manga_chapters": [
       77,
@@ -593,6 +645,7 @@
     "season": 3,
     "episode_in_season": 16,
     "title": "Perfect Game",
+    "wiki_title": null,
     "arc": "Return to Shiganshina Arc",
     "manga_chapters": [
       79,
@@ -604,6 +657,7 @@
     "season": 3,
     "episode_in_season": 17,
     "title": "Hero",
+    "wiki_title": null,
     "arc": "Return to Shiganshina Arc",
     "manga_chapters": [
       81,
@@ -616,6 +670,7 @@
     "season": 3,
     "episode_in_season": 18,
     "title": "Midnight Sun",
+    "wiki_title": null,
     "arc": "Return to Shiganshina Arc",
     "manga_chapters": [
       83,
@@ -627,6 +682,7 @@
     "season": 3,
     "episode_in_season": 19,
     "title": "The Basement",
+    "wiki_title": null,
     "arc": "Return to Shiganshina Arc",
     "manga_chapters": [
       85,
@@ -650,6 +706,7 @@
     "season": 3,
     "episode_in_season": 21,
     "title": "Attack Titan",
+    "wiki_title": "Attack Titan (Episode)",
     "arc": "Return to Shiganshina Arc",
     "manga_chapters": [
       88,
@@ -661,6 +718,7 @@
     "season": 3,
     "episode_in_season": 22,
     "title": "The Other Side of the Wall",
+    "wiki_title": null,
     "arc": "Return to Shiganshina Arc",
     "manga_chapters": [
       90
@@ -671,6 +729,7 @@
     "season": 4,
     "episode_in_season": 1,
     "title": "The Other Side of the Sea",
+    "wiki_title": null,
     "arc": "Marley Arc",
     "manga_chapters": [
       91,
@@ -682,6 +741,7 @@
     "season": 4,
     "episode_in_season": 2,
     "title": "Midnight Train",
+    "wiki_title": null,
     "arc": "Marley Arc",
     "manga_chapters": [
       93,
@@ -694,6 +754,7 @@
     "season": 4,
     "episode_in_season": 3,
     "title": "The Door of Hope",
+    "wiki_title": null,
     "arc": "Marley Arc",
     "manga_chapters": [
       94,
@@ -707,6 +768,7 @@
     "season": 4,
     "episode_in_season": 4,
     "title": "From One Hand to Another",
+    "wiki_title": null,
     "arc": "Marley Arc",
     "manga_chapters": [
       95,
@@ -719,6 +781,7 @@
     "season": 4,
     "episode_in_season": 5,
     "title": "Declaration of War",
+    "wiki_title": null,
     "arc": "Marley Arc",
     "manga_chapters": [
       99,
@@ -730,6 +793,7 @@
     "season": 4,
     "episode_in_season": 6,
     "title": "The War Hammer Titan",
+    "wiki_title": null,
     "arc": "Marley Arc",
     "manga_chapters": [
       100,
@@ -742,6 +806,7 @@
     "season": 4,
     "episode_in_season": 7,
     "title": "Assault",
+    "wiki_title": null,
     "arc": "Marley Arc",
     "manga_chapters": [
       102,
@@ -754,6 +819,7 @@
     "season": 4,
     "episode_in_season": 8,
     "title": "Assassin's Bullet",
+    "wiki_title": null,
     "arc": "Marley Arc",
     "manga_chapters": [
       104,
@@ -765,6 +831,7 @@
     "season": 4,
     "episode_in_season": 9,
     "title": "Brave Volunteers",
+    "wiki_title": null,
     "arc": "Marley Arc",
     "manga_chapters": [
       106,
@@ -776,6 +843,7 @@
     "season": 4,
     "episode_in_season": 10,
     "title": "A Sound Argument",
+    "wiki_title": null,
     "arc": "War for Paradis Arc",
     "manga_chapters": [
       107,
@@ -787,6 +855,7 @@
     "season": 4,
     "episode_in_season": 11,
     "title": "Deceiver",
+    "wiki_title": null,
     "arc": "War for Paradis Arc",
     "manga_chapters": [
       107,
@@ -799,6 +868,7 @@
     "season": 4,
     "episode_in_season": 12,
     "title": "Guides",
+    "wiki_title": null,
     "arc": "War for Paradis Arc",
     "manga_chapters": [
       110,
@@ -810,6 +880,7 @@
     "season": 4,
     "episode_in_season": 13,
     "title": "Children of the Forest",
+    "wiki_title": null,
     "arc": "War for Paradis Arc",
     "manga_chapters": [
       110,
@@ -822,6 +893,7 @@
     "season": 4,
     "episode_in_season": 14,
     "title": "Savagery",
+    "wiki_title": null,
     "arc": "War for Paradis Arc",
     "manga_chapters": [
       112,
@@ -833,6 +905,7 @@
     "season": 4,
     "episode_in_season": 15,
     "title": "Sole Salvation",
+    "wiki_title": null,
     "arc": "War for Paradis Arc",
     "manga_chapters": [
       114,
@@ -844,6 +917,7 @@
     "season": 4,
     "episode_in_season": 16,
     "title": "Above and Below",
+    "wiki_title": null,
     "arc": "War for Paradis Arc",
     "manga_chapters": [
       115,
@@ -856,6 +930,7 @@
     "season": 4,
     "episode_in_season": 17,
     "title": "Judgment",
+    "wiki_title": null,
     "arc": "War for Paradis Arc",
     "manga_chapters": [
       115,
@@ -869,6 +944,7 @@
     "season": 4,
     "episode_in_season": 18,
     "title": "Sneak Attack",
+    "wiki_title": null,
     "arc": "War for Paradis Arc",
     "manga_chapters": [
       117,
@@ -881,6 +957,7 @@
     "season": 4,
     "episode_in_season": 19,
     "title": "Two Brothers",
+    "wiki_title": null,
     "arc": "War for Paradis Arc",
     "manga_chapters": [
       115,
@@ -893,6 +970,7 @@
     "season": 4,
     "episode_in_season": 20,
     "title": "Memories of the Future",
+    "wiki_title": null,
     "arc": "War for Paradis Arc",
     "manga_chapters": [
       120,
@@ -904,6 +982,7 @@
     "season": 4,
     "episode_in_season": 21,
     "title": "From You, 2,000 Years Ago",
+    "wiki_title": null,
     "arc": "War for Paradis Arc",
     "manga_chapters": [
       121,
@@ -917,6 +996,7 @@
     "season": 4,
     "episode_in_season": 22,
     "title": "Thaw",
+    "wiki_title": null,
     "arc": "War for Paradis Arc",
     "manga_chapters": [
       124
@@ -927,6 +1007,7 @@
     "season": 4,
     "episode_in_season": 23,
     "title": "Sunset",
+    "wiki_title": null,
     "arc": "War for Paradis Arc",
     "manga_chapters": [
       125
@@ -937,6 +1018,7 @@
     "season": 4,
     "episode_in_season": 24,
     "title": "Pride",
+    "wiki_title": null,
     "arc": "War for Paradis Arc",
     "manga_chapters": [
       126
@@ -947,6 +1029,7 @@
     "season": 4,
     "episode_in_season": 25,
     "title": "Night of the End",
+    "wiki_title": null,
     "arc": "War for Paradis Arc",
     "manga_chapters": [
       127
@@ -957,6 +1040,7 @@
     "season": 4,
     "episode_in_season": 26,
     "title": "Traitor",
+    "wiki_title": null,
     "arc": "War for Paradis Arc",
     "manga_chapters": [
       128
@@ -967,6 +1051,7 @@
     "season": 4,
     "episode_in_season": 27,
     "title": "Retrospective",
+    "wiki_title": null,
     "arc": "War for Paradis Arc",
     "manga_chapters": [
       129,
@@ -978,6 +1063,7 @@
     "season": 4,
     "episode_in_season": 28,
     "title": "The Dawn of Humanity",
+    "wiki_title": null,
     "arc": "War for Paradis Arc",
     "manga_chapters": [
       130
@@ -988,6 +1074,7 @@
     "season": 4,
     "episode_in_season": 29,
     "title": "THE FINAL CHAPTERS Special 1",
+    "wiki_title": null,
     "arc": "War for Paradis Arc",
     "manga_chapters": [
       131,
@@ -1001,6 +1088,7 @@
     "season": 4,
     "episode_in_season": 30,
     "title": "THE FINAL CHAPTERS Special 2",
+    "wiki_title": null,
     "arc": "War for Paradis Arc",
     "manga_chapters": [
       135,

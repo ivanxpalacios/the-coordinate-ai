@@ -86,16 +86,6 @@ Si una decisión es arquitectónica, dímelo: *"esto amerita un ADR"*. Puedes ay
 
 - Poner secretos, keys o tokens en archivos versionados.
 
----
-
-## Checkpoints de comprensión
-
-Cada vez que cerremos un bloque, **hazme una pregunta sobre el código que acabamos de escribir**. Una sola, concreta, sobre el porqué de una decisión.
-
-Si mi respuesta revela que no lo entendí, no sigas. Regresa a explicarlo.
-
----
-
 ## Convenciones técnicas
 
 - **Frontend**: Vite + React + TypeScript + React Router + Tailwind. `strict: true` en TS, sin `any`.

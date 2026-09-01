@@ -27,3 +27,13 @@ August 29th, 2026.
 ## 7. Author
 
 Iván Palacios Martínez
+
+## 8. Amendment (2026-09-01): Llama 3.3 70B removed from Groq's catalog
+
+While testing `services/llm.py` (apps/api) end-to-end against the real Groq API, the model named in this ADR's Decision — `llama-3.3-70b-versatile` — returned `404 model_not_found`. Querying Groq's `/models` endpoint directly confirmed it is no longer listed, active or otherwise. This is R-02 materializing in practice, not just as a documented risk: the specific model backing D-01 disappeared from the provider's catalog roughly three days after this ADR was written, without the provider itself changing.
+
+The active catalog at the time of this amendment includes, among text-generation-capable models: `openai/gpt-oss-120b`, `openai/gpt-oss-20b`, `openai/gpt-oss-safeguard-20b` (safety/moderation-oriented, not general-purpose), `qwen/qwen3.8-27b`, `qwen/qwen3.6-27b`, `allam-2-7b` (small, Arabic-focused), and `groq/compound` / `groq/compound-mini` (Groq's own tool-using agentic models, not a plain chat completion model).
+
+Decision: replace the default model with `openai/gpt-oss-120b`. Reasoning: it is the largest general-purpose model in the current free-tier catalog, keeping the same "largest available open-weight model" intent that originally motivated picking Llama 3.3 70B over smaller alternatives. `openai/gpt-oss-20b` was considered as a lower-latency alternative but rejected for now, since RNF-01 (first token under 3s p90) has not yet been measured against either model — this can be revisited once real latency data exists. `groq/compound` was rejected because its agentic/tool-use behavior is out of scope for a RAG system that already does its own retrieval; introducing another layer of implicit tool-calling would complicate reasoning about what the model is doing with the retrieved context.
+
+This amendment does not change D-01 itself (Groq remains the provider) — only the specific model configured, which is why it is recorded here as an amendment rather than reopening the decision. Given this is the second time a provider's catalog shifted underneath a written decision (see the Gemini free-tier cuts already cited in section 4), the model should be treated as inherently more volatile than the provider choice: `groq_model` is already exposed as its own configurable setting in `apps/api/src/config.py` (not hardcoded) specifically so this class of change stays a one-line config update rather than a code change.

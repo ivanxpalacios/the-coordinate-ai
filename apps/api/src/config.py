@@ -6,7 +6,7 @@ class Settings(BaseSettings):
 
     database_url: str
     groq_api_key: str
-    groq_model: str = "llama-3.3-70b-versatile"
+    groq_model: str = "openai/gpt-oss-120b"
 
 
 settings = Settings()

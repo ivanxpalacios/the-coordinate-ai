@@ -4,8 +4,8 @@ through, no matter what the query asks for.
 """
 
 import pytest
-
 from cases import CASES
+
 from services.embeddings import embed_query
 from services.retrieval import search_chunks
 

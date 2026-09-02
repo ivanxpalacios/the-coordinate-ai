@@ -28,6 +28,9 @@ jobs:
 
       - run: uv run ruff check .
 
+      - name: Set up test env
+        run: cp .env.test .env
+
       # TODO: quitar esta tolerancia una vez exista el primer test real.
       # pytest sale con código 5 cuando no recolecta ningún test.
       - name: Run tests

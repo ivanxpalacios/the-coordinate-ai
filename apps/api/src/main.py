@@ -1,11 +1,17 @@
+import logging
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse
 
 from db.pool import pool
 from logging_config import configure_logging
 from routers.chat import router as chat_router
+from routers.health import router as health_router
 from routers.search import router as search_router
+from services.llm import LlmError
+
+logger = logging.getLogger(__name__)
 
 
 @asynccontextmanager
@@ -22,6 +28,16 @@ configure_logging()
 app = FastAPI(lifespan=lifespan)
 app.include_router(search_router)
 app.include_router(chat_router)
+app.include_router(health_router)
+
+
+@app.exception_handler(LlmError)
+async def llm_error_handler(request: Request, exc: LlmError) -> JSONResponse:
+    logger.error("LLM provider error", exc_info=exc)
+    return JSONResponse(
+        status_code=503,
+        content={"detail": "The AI provider is currently unavailable."},
+    )
 
 
 @app.get("/")

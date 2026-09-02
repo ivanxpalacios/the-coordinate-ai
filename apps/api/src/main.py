@@ -3,6 +3,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 
 from db.pool import pool
+from logging_config import configure_logging
 from routers.search import router as search_router
 
 
@@ -14,6 +15,8 @@ async def lifespan(app: FastAPI):
     yield
     await pool.close()
 
+
+configure_logging()
 
 app = FastAPI(lifespan=lifespan)
 app.include_router(search_router)

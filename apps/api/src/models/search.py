@@ -1,3 +1,5 @@
+import uuid
+
 from pydantic import BaseModel, Field
 
 
@@ -8,6 +10,7 @@ class SearchRequest(BaseModel):
 
 
 class SearchResult(BaseModel):
+    id: uuid.UUID
     content: str
     source_url: str
     source_title: str

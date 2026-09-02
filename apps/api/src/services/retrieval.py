@@ -9,7 +9,7 @@ from psycopg.rows import dict_row
 from db.pool import pool
 
 SEARCH_QUERY = """
-    SELECT content, source_url, source_title, entity, reveal_episode,
+    SELECT id, content, source_url, source_title, entity, reveal_episode,
            embedding <=> %s::vector AS distance
     FROM knowledge_chunks
     WHERE reveal_episode <= %s

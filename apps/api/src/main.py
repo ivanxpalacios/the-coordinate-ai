@@ -4,6 +4,7 @@ from fastapi import FastAPI
 
 from db.pool import pool
 from logging_config import configure_logging
+from routers.chat import router as chat_router
 from routers.search import router as search_router
 
 
@@ -20,6 +21,7 @@ configure_logging()
 
 app = FastAPI(lifespan=lifespan)
 app.include_router(search_router)
+app.include_router(chat_router)
 
 
 @app.get("/")

@@ -13,6 +13,7 @@ class ChatSource(BaseModel):
     source_title: str
     source_url: str
     entity: str | None
+    global_number: int
 
 
 class ChatResponse(BaseModel):

@@ -21,6 +21,7 @@ async def chat(request: ChatRequest) -> ChatResponse:
             source_title=c["source_title"],
             source_url=c["source_url"],
             entity=c["entity"],
+            global_number=c["reveal_episode"],
         )
         for c in chunks
     ]

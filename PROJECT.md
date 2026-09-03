@@ -430,6 +430,7 @@ Generar vectores e insertar en `knowledge_chunks`. El pipeline debe ser idempote
 - Endpoint de búsqueda con filtrado por episodio
 - Integración con el proveedor LLM
 - Suite de tests adversariales inicial
+- Status: COMPLETADA ✅
 
 > Nota: la ingesta a pgvector se adelantó y se hizo como parte del pipeline de datos (sección 10, Fase 6) — no como parte de este bloque.
 

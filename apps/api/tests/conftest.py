@@ -19,6 +19,19 @@ INSERT_CHUNK = """
 """
 
 
+def _ensure_test_database() -> None:
+    # settings.database_url is whatever .env currently points to — if the
+    # .env.test -> .env copy step is ever skipped (locally or in CI), this
+    # fixture would otherwise create tables and seed FIXTURE_CHUNKS straight
+    # into the real Neon database instead of failing loudly.
+    if "neon.tech" in settings.database_url:
+        raise RuntimeError(
+            "settings.database_url points at Neon. Refusing to create the "
+            "schema or seed fixture chunks against it — copy .env.test to "
+            ".env before running pytest."
+        )
+
+
 async def _create_schema() -> None:
     # A plain, unconfigured connection: the pool's configure step registers
     # the pgvector type, which requires the extension to already exist.
@@ -50,6 +63,7 @@ async def _seed_fixture_chunks() -> None:
 
 @pytest_asyncio.fixture(scope="session", autouse=True)
 async def open_pool():
+    _ensure_test_database()
     await _create_schema()
     await pool.open(wait=True)
     await _seed_fixture_chunks()

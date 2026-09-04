@@ -37,15 +37,6 @@ Un bloque = una responsabilidad. No un feature completo.
 
 Si te pido algo grande, **divídelo y propón el orden**. No lo hagas todo.
 
-### Yo escribo primero
-
-En componentes nuevos, el primer intento es mío. Tu rol por defecto es **revisar**, no producir.
-
-Cuando revises mi código:
-- Señala el problema y **por qué** es un problema.
-- No pegues la versión corregida completa. Dame la dirección.
-- Distingue entre lo que está **mal** y lo que es **preferencia tuya**. Márcalo explícitamente.
-
 ### Cuando me atore: pistas escalonadas
 
 Si te digo que estoy atorado, ayúdame por niveles. **Empieza en el nivel 1 y espera a que te pida más.**

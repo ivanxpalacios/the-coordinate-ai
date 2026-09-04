@@ -19,7 +19,7 @@ SEARCH_QUERY = """
 
 
 async def search_chunks(
-    query_embedding: list[float], user_episode: int, k: int = 5
+    query_embedding: list[float], user_episode: int, k: int = 10
 ) -> list[dict]:
     async with pool.connection() as conn:
         async with conn.cursor(row_factory=dict_row) as cur:

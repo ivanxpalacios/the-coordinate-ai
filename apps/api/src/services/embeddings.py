@@ -11,7 +11,7 @@ import asyncio
 
 from sentence_transformers import SentenceTransformer
 
-MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
+MODEL_NAME = "sentence-transformers/multi-qa-MiniLM-L6-cos-v1"
 
 model = SentenceTransformer(MODEL_NAME)
 

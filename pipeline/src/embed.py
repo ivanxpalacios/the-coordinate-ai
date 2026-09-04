@@ -13,7 +13,7 @@ from sentence_transformers import SentenceTransformer
 CHUNKS_DIR = Path(__file__).resolve().parents[2] / "data" / "chunks"
 EMBEDDINGS_DIR = Path(__file__).resolve().parents[2] / "data" / "embeddings"
 
-MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
+MODEL_NAME = "sentence-transformers/multi-qa-MiniLM-L6-cos-v1"
 
 
 def load_chunks(path: Path) -> list[dict]:

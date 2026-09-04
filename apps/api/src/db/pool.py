@@ -14,5 +14,6 @@ async def _configure(conn: AsyncConnection) -> None:
 pool = AsyncConnectionPool(
     conninfo=settings.database_url,
     configure=_configure,
+    check=AsyncConnectionPool.check_connection,
     open=False,
 )

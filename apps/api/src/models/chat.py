@@ -16,6 +16,8 @@ class ChatSource(BaseModel):
     global_number: int
 
 
+# Unused since /chat moved to StreamingResponse (SSE) — kept for reference
+# in case a non-streaming variant is reintroduced later.
 class ChatResponse(BaseModel):
     answer: str
     sources: list[ChatSource]

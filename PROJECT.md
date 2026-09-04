@@ -4,9 +4,9 @@
 
 | Campo | Valor |
 |---|---|
-| **Versión del documento** | 0.3 |
-| **Fecha** | 2026-08-31 |
-| **Estado** | En desarrollo — pipeline de datos completo |
+| **Versión del documento** | 0.4 |
+| **Fecha** | 2026-09-04 |
+| **Estado** | En desarrollo — núcleo RAG completo, arrancando Fase 3 (Frontend) |
 | **Tipo** | Proyecto fanmade, no comercial, de portafolio |
 
 ---
@@ -119,7 +119,7 @@ Demostrar capacidad de llevar un producto de idea a producción, resolviendo un 
 | ID | Requisito | Prioridad |
 |---|---|---|
 | RF-07 | El usuario envía preguntas en lenguaje natural y recibe respuesta. | Must |
-| RF-08 | La respuesta se muestra en streaming, token por token. | Should |
+| RF-08 | La respuesta se muestra en streaming, token por token. | Should — implementado en el backend (`POST /chat` vía SSE, ver ADR-0010). Pendiente el consumo en el frontend (Fase 3). |
 | RF-09 | Cada respuesta cita las fuentes usadas para generarla. | Must |
 | RF-10 | Si no hay información disponible al nivel del usuario, la IA lo indica sin revelar que existe información posterior. | Must |
 | RF-11 | El chat muestra de forma persistente el nivel de spoiler activo. | Must |
@@ -522,3 +522,4 @@ Este proyecto es un vehículo de aprendizaje. La IA asiste, no sustituye.
 | 0.1 | 2026-08-21 | Documento inicial de planeación |
 | 0.2 | 2026-08-26 | The scraping was deliberately limited to a subset (the complete first season plus three characters: Eren, Zeke, and Ymir) to validate the labeling before scaling up. |
 | 0.3 | 2026-08-31 | Pipeline de datos completo de punta a punta: scraping y etiquetado de las 4 temporadas (episodios 1-89) y los 3 personajes en alcance, esquema de `knowledge_chunks` creado en Neon/pgvector, embeddings generados con `all-MiniLM-L6-v2`, y los ~786 chunks ingeridos. Fases 1 y 5 del roadmap cerradas; la ingesta a pgvector se adelantó desde la Fase 2. |
+| 0.4 | 2026-09-04 | `POST /chat` migrado de respuesta completa a streaming vía Server-Sent Events (SSE), como preparación para la Fase 3. Se agregó `stream_complete` en `services/llm.py` y el endpoint ahora responde con `StreamingResponse` emitiendo eventos `sources`, `token` y `done` (o `error` si falla el proveedor a media generación). Ver ADR-0010. |

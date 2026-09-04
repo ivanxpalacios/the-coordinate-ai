@@ -1,8 +1,12 @@
-from fastapi import APIRouter
+import json
+from collections.abc import AsyncIterator
 
-from models.chat import ChatRequest, ChatResponse, ChatSource
+from fastapi import APIRouter
+from fastapi.responses import StreamingResponse
+
+from models.chat import ChatRequest, ChatSource
 from services.embeddings import embed_query
-from services.llm import complete
+from services.llm import LlmError, stream_complete
 from services.prompts import build_messages
 from services.reranking import rerank
 from services.retrieval import search_chunks
@@ -16,13 +20,14 @@ RETRIEVE_K = 25
 FINAL_K = 10
 
 
-@router.post("/chat", response_model=ChatResponse)
-async def chat(request: ChatRequest) -> ChatResponse:
+def _sse(payload: dict) -> str:
+    return f"data: {json.dumps(payload)}\n\n"
+
+
+async def _stream_chat(request: ChatRequest) -> AsyncIterator[str]:
     query_embedding = await embed_query(request.question)
     candidates = await search_chunks(query_embedding, request.user_episode, RETRIEVE_K)
     chunks = await rerank(request.question, candidates, FINAL_K)
-    messages = build_messages(request.question, chunks)
-    answer = await complete(messages)
     sources = [
         ChatSource(
             chunk_id=c["id"],
@@ -33,4 +38,18 @@ async def chat(request: ChatRequest) -> ChatResponse:
         )
         for c in chunks
     ]
-    return ChatResponse(answer=answer, sources=sources)
+    yield _sse({"type": "sources", "sources": [s.model_dump(mode="json") for s in sources]})
+
+    messages = build_messages(request.question, chunks)
+    try:
+        async for delta in stream_complete(messages):
+            yield _sse({"type": "token", "content": delta})
+    except LlmError as e:
+        yield _sse({"type": "error", "message": str(e)})
+        return
+    yield _sse({"type": "done"})
+
+
+@router.post("/chat")
+async def chat(request: ChatRequest) -> StreamingResponse:
+    return StreamingResponse(_stream_chat(request), media_type="text/event-stream")

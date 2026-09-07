@@ -21,6 +21,7 @@ function updateLastMessage(prev: Message[], updater: (message: Message) => Messa
 function Chat() {
   const { userEpisode } = useOutletContext<LayoutContext>()
   const currentEpisode = episodeList.find((episode) => episode.global_number === userEpisode)
+  const progressLoaded = userEpisode !== null
   const [messages, setMessages] = useState<Message[]>([])
   const [isStreaming, setIsStreaming] = useState(false)
   const scrollRef = useRef<HTMLDivElement>(null)
@@ -42,6 +43,7 @@ function Chat() {
   }, [messages])
 
   async function handleSubmit(question: string) {
+    if (userEpisode === null) return
     stickToBottomRef.current = true
     smoothNextScrollRef.current = true
     setMessages((prev) => [
@@ -99,7 +101,7 @@ function Chat() {
           className="pointer-events-none sticky bottom-0 -mt-16 h-16 bg-gradient-to-t from-ink to-transparent"
         />
       </div>
-      <ChatInput onSubmit={handleSubmit} disabled={isStreaming} />
+      <ChatInput onSubmit={handleSubmit} disabled={isStreaming || !progressLoaded} />
     </div>
   )
 }

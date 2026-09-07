@@ -14,16 +14,18 @@ function truncateTitle(title: string): string {
 interface EpisodeSelectorProps {
   value: number
   onChange: (globalNumber: number) => void
+  disabled?: boolean
 }
 
-function EpisodeSelector({ value, onChange }: EpisodeSelectorProps) {
+function EpisodeSelector({ value, onChange, disabled = false }: EpisodeSelectorProps) {
   return (
     <select
       value={value}
       onChange={(event) => onChange(Number(event.target.value))}
+      disabled={disabled}
       aria-label="Your progress"
       style={{ width: `${TITLE_MAX_LENGTH + 14}ch` }}
-      className="overflow-hidden text-ellipsis whitespace-nowrap border border-line bg-panel px-2 py-0.5 font-mono text-xs text-fog focus:outline-none focus:text-ash"
+      className="overflow-hidden text-ellipsis whitespace-nowrap border border-line bg-panel px-2 py-0.5 font-mono text-xs text-fog focus:outline-none focus:text-ash disabled:opacity-50"
     >
       {seasons.map((season) => (
         <optgroup key={season} label={`Season ${season}`}>

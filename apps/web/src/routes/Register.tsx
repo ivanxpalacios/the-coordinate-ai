@@ -1,16 +1,20 @@
-import { useState, type FormEvent } from 'react'
+import { useEffect, useState, type FormEvent } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../features/auth/useAuth'
 import { registerUser } from '../lib/api'
 
 function Register() {
-  const { signIn } = useAuth()
+  const { session, signIn } = useAuth()
   const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [accessCode, setAccessCode] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [submitting, setSubmitting] = useState(false)
+
+  useEffect(() => {
+    if (session) navigate('/')
+  }, [session, navigate])
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
@@ -28,9 +32,7 @@ function Register() {
     if (signInError) {
       setError(signInError)
       setSubmitting(false)
-      return
     }
-    navigate('/')
   }
 
   return (

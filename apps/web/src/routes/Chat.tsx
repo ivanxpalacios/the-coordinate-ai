@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useOutletContext } from 'react-router-dom'
 import BriefingCard from '../components/chat/BriefingCard'
 import ChatInput from '../components/chat/ChatInput'
@@ -17,8 +17,27 @@ function Chat() {
   const { userEpisode } = useOutletContext<LayoutContext>()
   const [messages, setMessages] = useState<Message[]>([])
   const [isStreaming, setIsStreaming] = useState(false)
+  const scrollRef = useRef<HTMLDivElement>(null)
+  const stickToBottomRef = useRef(true)
+  const smoothNextScrollRef = useRef(false)
+
+  function handleScroll() {
+    const el = scrollRef.current
+    if (!el) return
+    const distanceFromBottom = el.scrollHeight - el.scrollTop - el.clientHeight
+    stickToBottomRef.current = distanceFromBottom < 80
+  }
+
+  useEffect(() => {
+    if (!stickToBottomRef.current) return
+    const behavior = smoothNextScrollRef.current ? 'smooth' : 'auto'
+    smoothNextScrollRef.current = false
+    scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior })
+  }, [messages])
 
   async function handleSubmit(question: string) {
+    stickToBottomRef.current = true
+    smoothNextScrollRef.current = true
     setMessages((prev) => [
       ...prev,
       { role: 'user', content: question },
@@ -51,7 +70,7 @@ function Chat() {
 
   return (
     <div className="flex h-full flex-col">
-      <div className="relative flex-1 overflow-y-auto">
+      <div ref={scrollRef} onScroll={handleScroll} className="relative flex-1 overflow-y-auto">
         <BriefingCard>
           You're marked through Episode {userEpisode}. Ask about arcs, characters, or titans —
           I won't go past your line.
@@ -59,7 +78,7 @@ function Chat() {
         <MessageList messages={messages} />
         <div
           aria-hidden="true"
-          className="sticky bottom-0 -mt-16 h-16 bg-gradient-to-t from-ink to-transparent"
+          className="pointer-events-none sticky bottom-0 -mt-16 h-16 bg-gradient-to-t from-ink to-transparent"
         />
       </div>
       <ChatInput onSubmit={handleSubmit} disabled={isStreaming} />

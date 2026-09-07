@@ -1,6 +1,10 @@
+import { useState } from 'react'
 import { Link, Outlet } from 'react-router-dom'
+import EpisodeSelector from '../progress/EpisodeSelector'
 
 function Layout() {
+  const [userEpisode, setUserEpisode] = useState(9)
+
   return (
     <div className="flex h-svh flex-col">
       <nav className="flex items-center justify-between border-b border-line px-6 py-3">
@@ -8,9 +12,7 @@ function Layout() {
           THE COORDINATE AI
         </Link>
         <div className="flex items-center gap-4">
-          <span className="border border-line px-2 py-0.5 font-mono text-xs text-fog">
-            S1 · EP 09
-          </span>
+          <EpisodeSelector value={userEpisode} onChange={setUserEpisode} />
           <Link to="/about" className="font-mono text-sm text-fog hover:text-ash">
             About
           </Link>

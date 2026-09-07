@@ -6,6 +6,7 @@ import MessageList from '../components/chat/MessageList'
 import type { Message } from '../components/chat/MessageBubble'
 import type { LayoutContext } from '../components/layout/Layout'
 import { streamChat } from '../lib/api'
+import type { ChatSource } from '../types/chat'
 
 function updateLastMessage(prev: Message[], updater: (message: Message) => Message): Message[] {
   const next = [...prev]
@@ -45,10 +46,11 @@ function Chat() {
     ])
     setIsStreaming(true)
 
+    let pendingSources: ChatSource[] | undefined
+
     for await (const event of streamChat(question, userEpisode)) {
       if (event.type === 'sources') {
-        const { sources } = event
-        setMessages((prev) => updateLastMessage(prev, (message) => ({ ...message, sources })))
+        pendingSources = event.sources
       } else if (event.type === 'token') {
         const { content } = event
         setMessages((prev) =>
@@ -57,6 +59,11 @@ function Chat() {
             content: message.content + content,
           })),
         )
+      } else if (event.type === 'done') {
+        const sources = pendingSources
+        if (sources) {
+          setMessages((prev) => updateLastMessage(prev, (message) => ({ ...message, sources })))
+        }
       } else if (event.type === 'error') {
         const { message: errorMessage } = event
         setMessages((prev) =>

@@ -47,7 +47,11 @@ function MessageBubble({ message }: { message: Message }) {
   return (
     <div className="flex justify-start">
       <div className="max-w-2xl text-left">
-        <ReactMarkdown components={markdownComponents}>{message.content}</ReactMarkdown>
+        {message.content ? (
+          <ReactMarkdown components={markdownComponents}>{message.content}</ReactMarkdown>
+        ) : (
+          <span className="inline-block h-4 w-4 animate-pulse rounded-full bg-signal" />
+        )}
         {primarySource && (
           <a
             href={primarySource.source_url}

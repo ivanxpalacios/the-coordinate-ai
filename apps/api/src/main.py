@@ -28,11 +28,12 @@ async def lifespan(app: FastAPI):
 configure_logging()
 
 app = FastAPI(lifespan=lifespan)
-# Matches any localhost port since Vite's dev port isn't fixed (5173, 5174, ...).
-# Add the production frontend origin explicitly once Phase 6 (deployment) lands.
+# Matches any localhost port since Vite's dev port isn't fixed (5173, 5174, ...),
+# plus the production frontend origin (Phase 6, ADR pending).
 app.add_middleware(
     CORSMiddleware,
     allow_origin_regex=r"^http://localhost:\d+$",
+    allow_origins=["https://the-coordinate-ai.ivanpalacios.dev"],
     allow_methods=["*"],
     allow_headers=["*"],
 )

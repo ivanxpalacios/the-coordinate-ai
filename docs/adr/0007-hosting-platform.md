@@ -18,6 +18,8 @@ Render and Koyeb — rejected as the primary compute host: both cap free instanc
 
 Oracle requires a credit card on file for a $1 identity hold (no recurring charge), and ARM instance capacity has been reported as frequently unavailable in US regions — provisioning in EU or APAC is more reliable and should be preferred. Splitting compute (Oracle) and database (Neon) across two providers means two dashboards/accounts to manage instead of one platform, and their network distance affects the latency budget — the Oracle region and the Neon region should be chosen close to each other. Neon's idle autosuspend still adds up to ~1-3s to the first request after a quiet period, even though compute itself stays always-on.
 
+Oracle's stock Ubuntu images ship with `iptables` preconfigured to accept only inbound SSH (port 22) and reject everything else by default, independently of and in addition to the cloud-level firewall (Network Security Groups / Security Lists). Opening a port in the NSG is not sufficient to expose a service — a matching `iptables` rule must also be added inside the instance itself (and persisted with `netfilter-persistent`, or it reverts on reboot). This is not prominently documented in the Oracle console, and the failure mode ("connection refused") is indistinguishable from a port simply not being open at the NSG level, which cost debugging time during Phase 6 deployment.
+
 ## 6. Date
 
 August 29th, 2026.

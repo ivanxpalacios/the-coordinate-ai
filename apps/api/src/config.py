@@ -7,6 +7,10 @@ class Settings(BaseSettings):
     database_url: str
     groq_api_key: str
     groq_model: str = "openai/gpt-oss-120b"
+    supabase_url: str
+    supabase_secret_key: str
+    supabase_jwks_url: str
+    registration_access_code: str
 
 
 settings = Settings()

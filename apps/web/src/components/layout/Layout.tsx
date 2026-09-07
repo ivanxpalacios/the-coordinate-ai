@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, useNavigate } from 'react-router-dom'
+import { useAuth } from '../../features/auth/useAuth'
 import EpisodeSelector from '../progress/EpisodeSelector'
 
 export interface LayoutContext {
@@ -8,6 +9,13 @@ export interface LayoutContext {
 
 function Layout() {
   const [userEpisode, setUserEpisode] = useState(9)
+  const { session, signOut } = useAuth()
+  const navigate = useNavigate()
+
+  async function handleSignOut() {
+    await signOut()
+    navigate('/')
+  }
 
   return (
     <div className="flex h-svh flex-col">
@@ -20,6 +28,19 @@ function Layout() {
           <Link to="/about" className="font-mono text-sm text-fog hover:text-ash">
             About
           </Link>
+          {session ? (
+            <button
+              type="button"
+              onClick={handleSignOut}
+              className="font-mono text-sm text-fog hover:text-ash"
+            >
+              Log out
+            </button>
+          ) : (
+            <Link to="/login" className="font-mono text-sm text-fog hover:text-ash">
+              Log in
+            </Link>
+          )}
         </div>
       </nav>
 

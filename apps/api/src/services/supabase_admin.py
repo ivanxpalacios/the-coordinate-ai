@@ -20,7 +20,7 @@ async def create_user(email: str, password: str) -> dict:
             json={"email": email, "password": password, "email_confirm": True},
         )
 
-    if response.status_code == 201:
+    if response.status_code < 300:
         data = response.json()
         return {"id": data["id"], "email": data["email"]}
 

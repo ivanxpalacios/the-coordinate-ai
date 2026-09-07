@@ -21,3 +21,6 @@ data/processed/
 .DS_Store
 .vscode/
 .idea/
+
+# Local scratch files (may contain secrets, e.g. SSH keys)
+temp/

@@ -27,3 +27,23 @@ August 29th, 2026.
 ## 7. Author
 
 Iván Palacios Martínez
+
+## 8. Amendment (2026-09-01): Llama 3.3 70B removed from Groq's catalog
+
+While testing `services/llm.py` (apps/api) end-to-end against the real Groq API, the model named in this ADR's Decision — `llama-3.3-70b-versatile` — returned `404 model_not_found`. Querying Groq's `/models` endpoint directly confirmed it is no longer listed, active or otherwise. This is R-02 materializing in practice, not just as a documented risk: the specific model backing D-01 disappeared from the provider's catalog roughly three days after this ADR was written, without the provider itself changing.
+
+The active catalog at the time of this amendment includes, among text-generation-capable models: `openai/gpt-oss-120b`, `openai/gpt-oss-20b`, `openai/gpt-oss-safeguard-20b` (safety/moderation-oriented, not general-purpose), `qwen/qwen3.8-27b`, `qwen/qwen3.6-27b`, `allam-2-7b` (small, Arabic-focused), and `groq/compound` / `groq/compound-mini` (Groq's own tool-using agentic models, not a plain chat completion model).
+
+Decision: replace the default model with `openai/gpt-oss-120b`. Reasoning: it is the largest general-purpose model in the current free-tier catalog, keeping the same "largest available open-weight model" intent that originally motivated picking Llama 3.3 70B over smaller alternatives. `openai/gpt-oss-20b` was considered as a lower-latency alternative but rejected for now, since RNF-01 (first token under 3s p90) has not yet been measured against either model — this can be revisited once real latency data exists. `groq/compound` was rejected because its agentic/tool-use behavior is out of scope for a RAG system that already does its own retrieval; introducing another layer of implicit tool-calling would complicate reasoning about what the model is doing with the retrieved context.
+
+This amendment does not change D-01 itself (Groq remains the provider) — only the specific model configured, which is why it is recorded here as an amendment rather than reopening the decision. Given this is the second time a provider's catalog shifted underneath a written decision (see the Gemini free-tier cuts already cited in section 4), the model should be treated as inherently more volatile than the provider choice: `groq_model` is already exposed as its own configurable setting in `apps/api/src/config.py` (not hardcoded) specifically so this class of change stays a one-line config update rather than a code change.
+
+## 9. Amendment (2026-09-04): embeddings model swapped for D-02
+
+While debugging a retrieval recall problem (see ADR-0009), it became clear that `all-MiniLM-L6-v2` — a general-purpose sentence-similarity model — was not the best fit for this project's actual use case: embedding a short natural-language question and matching it against passages, which is asymmetric semantic search, not symmetric sentence similarity.
+
+Decision: replace it with `sentence-transformers/multi-qa-MiniLM-L6-cos-v1`, a model from the same family trained specifically for question-passage matching (same 384 dimensions, cosine distance, so no schema change to `knowledge_chunks`). All ~786 chunk embeddings were regenerated and upserted by deterministic id (no duplicates). Configured in `apps/api/src/services/embeddings.py` and `pipeline/src/embed.py` (commit `cf579fd`).
+
+Measured effect: for the "Who is the Female Titan?" / `user_episode=25` case, the chunk that actually answers the question moved from outside the top-20 results to rank 6 — a real improvement, but insufficient on its own at the k=5 the API used at the time. This is why ADR-0009 (two-stage retrieval with cross-encoder reranking) was pursued next: the embeddings swap alone did not close the gap.
+
+This amendment does not reopen D-02 (local embeddings remain the choice) — only the specific model, for the same reason section 8 gives for the LLM model swap: the model is more volatile than the underlying decision (local vs. API), so it is recorded as an amendment.

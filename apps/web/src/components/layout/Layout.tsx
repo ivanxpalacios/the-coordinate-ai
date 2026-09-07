@@ -3,11 +3,11 @@ import { Link, Outlet } from 'react-router-dom'
 function Layout() {
   return (
     <div className="flex min-h-svh flex-col">
-      <nav className="flex items-center justify-between border-b border-zinc-800 px-6 py-4">
-        <Link to="/" className="font-medium">
-          The Coordinate AI
+      <nav className="flex items-center justify-between border-b border-line px-6 py-3">
+        <Link to="/" className="font-display text-lg tracking-wide">
+          THE COORDINATE AI
         </Link>
-        <Link to="/about" className="text-sm text-zinc-400 hover:text-zinc-100">
+        <Link to="/about" className="font-mono text-sm text-fog hover:text-ash">
           About
         </Link>
       </nav>
@@ -16,8 +16,8 @@ function Layout() {
         <Outlet />
       </main>
 
-      <footer className="border-t border-zinc-800 px-6 py-4 text-center text-xs text-zinc-500">
-        The Coordinate AI is an unofficial fan project. Not affiliated with Kodansha, MAPPA, or Wit Studio.
+      <footer className="border-t border-line px-6 py-3 text-center font-mono text-xs text-fog">
+        Unofficial fan project. Not affiliated with Kodansha, MAPPA, or Wit Studio.
       </footer>
     </div>
   )

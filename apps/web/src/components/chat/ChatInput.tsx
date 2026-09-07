@@ -19,7 +19,7 @@ function ChatInput({ onSubmit, disabled = false }: ChatInputProps) {
     <div className="px-6 py-4">
       <form
         onSubmit={handleSubmit}
-        className="mx-auto flex max-w-2xl items-center gap-2 rounded-full border border-line bg-panel py-2 pl-5 pr-2"
+        className="mx-auto flex max-w-3xl items-center gap-2 rounded-full border border-line bg-panel py-2 pl-5 pr-2"
       >
         <input
           type="text"

@@ -21,5 +21,7 @@ html {
 
 body {
   margin: 0;
+  line-height: 1.65;
+  letter-spacing: 0.05em;
   @apply bg-ink text-ash font-body;
 }

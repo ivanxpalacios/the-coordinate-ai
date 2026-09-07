@@ -20,7 +20,7 @@ const stack: StackRow[] = [
 function About() {
   return (
     <div className="h-full overflow-y-auto">
-      <div className="mx-auto max-w-2xl px-6 py-10">
+      <div className="mx-auto max-w-3xl px-6 py-10">
         <section>
           <h2 className="font-mono text-xs text-fog">01 — The problem</h2>
           <p className="mt-2 text-sm text-ash">

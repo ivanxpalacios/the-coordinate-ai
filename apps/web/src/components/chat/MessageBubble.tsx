@@ -19,16 +19,21 @@ function MessageBubble({ message }: { message: Message }) {
     )
   }
 
+  const primarySource = message.sources?.[0]
+
   return (
     <div className="flex justify-start">
-      <div className="max-w-xl text-left">
+      <div className="max-w-2xl text-left">
         <p className="whitespace-pre-wrap text-sm text-ash">{message.content}</p>
-        {message.sources && message.sources.length > 0 && (
-          <ul className="mt-1 flex flex-wrap gap-x-3 font-mono text-xs text-fog">
-            {message.sources.map((source) => (
-              <li key={source.chunk_id}>source: {source.source_title}</li>
-            ))}
-          </ul>
+        {primarySource && (
+          <a
+            href={primarySource.source_url}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-1 inline-block font-mono text-xs text-fog underline decoration-line hover:text-signal"
+          >
+            source: {primarySource.source_title}
+          </a>
         )}
       </div>
     </div>

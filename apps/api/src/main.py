@@ -2,6 +2,7 @@ import logging
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from db.pool import pool
@@ -26,6 +27,14 @@ async def lifespan(app: FastAPI):
 configure_logging()
 
 app = FastAPI(lifespan=lifespan)
+# Matches any localhost port since Vite's dev port isn't fixed (5173, 5174, ...).
+# Add the production frontend origin explicitly once Phase 6 (deployment) lands.
+app.add_middleware(
+    CORSMiddleware,
+    allow_origin_regex=r"^http://localhost:\d+$",
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 app.include_router(search_router)
 app.include_router(chat_router)
 app.include_router(health_router)

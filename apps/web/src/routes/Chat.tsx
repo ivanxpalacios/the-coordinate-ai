@@ -7,6 +7,10 @@ import type { Message } from '../components/chat/MessageBubble'
 import type { LayoutContext } from '../components/layout/Layout'
 import { streamChat } from '../lib/api'
 import type { ChatSource } from '../types/chat'
+import episodes from '../data/episodes.json'
+import type { Episode } from '../types/episode'
+
+const episodeList = episodes as Episode[]
 
 function updateLastMessage(prev: Message[], updater: (message: Message) => Message): Message[] {
   const next = [...prev]
@@ -16,6 +20,7 @@ function updateLastMessage(prev: Message[], updater: (message: Message) => Messa
 
 function Chat() {
   const { userEpisode } = useOutletContext<LayoutContext>()
+  const currentEpisode = episodeList.find((episode) => episode.global_number === userEpisode)
   const [messages, setMessages] = useState<Message[]>([])
   const [isStreaming, setIsStreaming] = useState(false)
   const scrollRef = useRef<HTMLDivElement>(null)
@@ -77,11 +82,17 @@ function Chat() {
 
   return (
     <div className="flex h-full flex-col">
-      <div ref={scrollRef} onScroll={handleScroll} className="relative flex-1 overflow-y-auto">
+      {currentEpisode && (
         <BriefingCard>
-          You're marked through Episode {userEpisode}. Ask about arcs, characters, or titans —
-          I won't go past your line.
+          <strong className="text-ash">
+            Spoiler-safe through S{currentEpisode.season} · EP{' '}
+            {String(currentEpisode.episode_in_season).padStart(2, '0')} — {currentEpisode.title}.
+          </strong>{' '}
+          Answers stay inside that point in the story — nothing from later episodes. Adjust your
+          progress anytime with the selector, top right.
         </BriefingCard>
+      )}
+      <div ref={scrollRef} onScroll={handleScroll} className="relative flex-1 overflow-y-auto">
         <MessageList messages={messages} />
         <div
           aria-hidden="true"

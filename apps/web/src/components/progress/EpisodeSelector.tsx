@@ -22,7 +22,8 @@ function EpisodeSelector({ value, onChange }: EpisodeSelectorProps) {
       value={value}
       onChange={(event) => onChange(Number(event.target.value))}
       aria-label="Your progress"
-      className="border border-line bg-panel px-2 py-0.5 font-mono text-xs text-fog focus:outline-none focus:text-ash"
+      style={{ width: `${TITLE_MAX_LENGTH + 14}ch` }}
+      className="overflow-hidden text-ellipsis whitespace-nowrap border border-line bg-panel px-2 py-0.5 font-mono text-xs text-fog focus:outline-none focus:text-ash"
     >
       {seasons.map((season) => (
         <optgroup key={season} label={`Season ${season}`}>

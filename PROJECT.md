@@ -4,9 +4,9 @@
 
 | Campo | Valor |
 |---|---|
-| **Versión del documento** | 0.4 |
-| **Fecha** | 2026-09-04 |
-| **Estado** | En desarrollo — núcleo RAG completo, arrancando Fase 3 (Frontend) |
+| **Versión del documento** | 0.5 |
+| **Fecha** | 2026-09-06 |
+| **Estado** | En desarrollo — Fase 3 (Frontend) cerrada de forma tentativa, arrancando Fase 4 (Autenticación) |
 | **Tipo** | Proyecto fanmade, no comercial, de portafolio |
 
 ---
@@ -439,6 +439,7 @@ Generar vectores e insertar en `knowledge_chunks`. El pipeline debe ser idempote
 - Home con disclaimer y sección técnica
 - Interfaz de chat con streaming
 - Selector de progreso
+- Status: COMPLETADA (tentativa) ✅ — pendiente pulir detalles menores en About (los TODO de la tabla de stack reflejan Fases 4 y 6, no deuda de esta fase)
 
 ### Fase 4 — Autenticación
 
@@ -523,3 +524,4 @@ Este proyecto es un vehículo de aprendizaje. La IA asiste, no sustituye.
 | 0.2 | 2026-08-26 | The scraping was deliberately limited to a subset (the complete first season plus three characters: Eren, Zeke, and Ymir) to validate the labeling before scaling up. |
 | 0.3 | 2026-08-31 | Pipeline de datos completo de punta a punta: scraping y etiquetado de las 4 temporadas (episodios 1-89) y los 3 personajes en alcance, esquema de `knowledge_chunks` creado en Neon/pgvector, embeddings generados con `all-MiniLM-L6-v2`, y los ~786 chunks ingeridos. Fases 1 y 5 del roadmap cerradas; la ingesta a pgvector se adelantó desde la Fase 2. |
 | 0.4 | 2026-09-04 | `POST /chat` migrado de respuesta completa a streaming vía Server-Sent Events (SSE), como preparación para la Fase 3. Se agregó `stream_complete` en `services/llm.py` y el endpoint ahora responde con `StreamingResponse` emitiendo eventos `sources`, `token` y `done` (o `error` si falla el proveedor a media generación). Ver ADR-0010. |
+| 0.5 | 2026-09-06 | Fase 3 (Frontend) cerrada de forma tentativa: se fusionó el Home dentro de `About` (propuesta de valor, disclaimer fanmade y CTA al chat), el `BriefingCard` se fijó fuera del área con scroll y ahora muestra temporada/episodio/título (igual formato que el selector) en vez del número global, con texto explícito sobre el mecanismo anti-spoiler y referencia al selector de progreso. Se ajustó el ancho del `EpisodeSelector` para evitar espacio muerto. Pendiente: pulir detalles menores de `About` cuando se decida. Arranca Fase 4 (Autenticación). |

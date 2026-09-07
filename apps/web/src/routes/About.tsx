@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import DefenseLayers from '../components/about/DefenseLayers'
 import SystemMap from '../components/about/SystemMap'
 
@@ -21,6 +22,27 @@ function About() {
   return (
     <div className="h-full overflow-y-auto">
       <div className="mx-auto max-w-3xl px-6 py-10">
+        <section>
+          <h1 className="font-display text-3xl tracking-wide text-ash">The Coordinate AI</h1>
+          <p className="mt-3 text-sm text-ash">
+            Ask anything about the Attack on Titan story so far — get answers built only from
+            what your declared episode should already know, sources cited, nothing from later
+            arcs.
+          </p>
+          <p className="mt-4 font-mono text-xs text-fog">
+            Unofficial, non-commercial fan project — not affiliated with Kodansha, MAPPA, or Wit
+            Studio. Text sourced from wiki content under CC BY-SA, always attributed.
+          </p>
+          <Link
+            to="/"
+            className="mt-6 inline-block rounded-full bg-signal px-5 py-2 font-mono text-xs uppercase tracking-wide text-ink"
+          >
+            Start asking →
+          </Link>
+        </section>
+
+        <hr className="my-8 border-line" />
+
         <section>
           <h2 className="font-mono text-xs text-fog">01 — The problem</h2>
           <p className="mt-2 text-sm text-ash">

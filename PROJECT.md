@@ -4,9 +4,9 @@
 
 | Campo | Valor |
 |---|---|
-| **Versión del documento** | 0.7 |
+| **Versión del documento** | 0.8 |
 | **Fecha** | 2026-09-07 |
-| **Estado** | En desarrollo — Fase 4 (Autenticación) en progreso: registro, login, chat protegido y persistencia de progreso completos; falta proteger `/chat` en el backend |
+| **Estado** | En desarrollo — Fase 4 (Autenticación) completada en registro, login, protección de rutas y persistencia de progreso. Rate limit por usuario (RF-12) queda pendiente, diseño discutido pero no implementado; no bloquea el cierre de fase dado el acceso privado/invite-only. Arranca Fase 6 (Producción) |
 | **Tipo** | Proyecto fanmade, no comercial, de portafolio |
 
 ---
@@ -123,7 +123,7 @@ Demostrar capacidad de llevar un producto de idea a producción, resolviendo un 
 | RF-09 | Cada respuesta cita las fuentes usadas para generarla. | Must |
 | RF-10 | Si no hay información disponible al nivel del usuario, la IA lo indica sin revelar que existe información posterior. | Must |
 | RF-11 | El chat muestra de forma persistente el nivel de spoiler activo. | Must |
-| RF-12 | Existe un rate limit por usuario para proteger las cuotas gratuitas. | Must |
+| RF-12 | Existe un rate limit por usuario para proteger las cuotas gratuitas. | Must — pendiente. Diseño discutido (contador en memoria por `user_id`, apagado por defecto vía flag) pero no implementado; se pospuso por el acceso invite-only actual. Además del propio rate limit, hoy un `RateLimitError` de Groq (cupo diario agotado) se atrapa como `LlmError` y llega al chat como el mensaje crudo del proveedor — pendiente redactar un mensaje propio. |
 
 ### 6.3 Sistema Spoiler-Free
 
@@ -450,7 +450,9 @@ Generar vectores e insertar en `knowledge_chunks`. El pipeline debe ser idempote
 
 - Supabase Auth integrado — hecho: cliente + `AuthContext`, registro con gate de código de acceso (ADR-0011), login/logout, `/` protegido con `RequireAuth` (ADR-0012)
 - Persistencia de progreso — hecho: tabla `user_progress` en Supabase (RLS), `useUserProgress` la lee/crea al iniciar sesión y escribe en cada cambio de episodio; el `EpisodeSelector` se oculta sin sesión en vez de mostrarse deshabilitado
-- Protección de rutas y rate limiting — pendiente: falta verificar el JWT en `POST /chat` (backend)
+- Protección de rutas — hecho: `POST /chat` verifica el JWT de sesión vía JWKS (`require_user`, `pyjwt[crypto]`) antes de correr el pipeline RAG
+- Rate limiting (RF-12) — **pendiente, pospuesto fuera de esta fase**: el acceso invite-only actual reduce el riesgo de abuso de cuota lo suficiente para no bloquear el cierre de Fase 4
+- Status: COMPLETADA (con RF-12 pendiente, ver nota) ✅
 
 ### Fase 5 — Escalado de datos
 
@@ -532,3 +534,4 @@ Este proyecto es un vehículo de aprendizaje. La IA asiste, no sustituye.
 | 0.5 | 2026-09-06 | Fase 3 (Frontend) cerrada de forma tentativa: se fusionó el Home dentro de `About` (propuesta de valor, disclaimer fanmade y CTA al chat), el `BriefingCard` se fijó fuera del área con scroll y ahora muestra temporada/episodio/título (igual formato que el selector) en vez del número global, con texto explícito sobre el mecanismo anti-spoiler y referencia al selector de progreso. Se ajustó el ancho del `EpisodeSelector` para evitar espacio muerto. Pendiente: pulir detalles menores de `About` cuando se decida. Arranca Fase 4 (Autenticación). |
 | 0.6 | 2026-09-07 | Fase 4 en progreso: cliente de Supabase y `AuthContext` en el frontend; `POST /auth/register` en el backend valida un código de acceso compartido y crea la cuenta vía Admin API de Supabase (email pre-confirmado, sin dependencia de correo saliente — ADR-0011); pantallas de Login/Register; el chat (`/`) ahora requiere sesión vía `RequireAuth`, quedando fuera del MVP el modo demo sin cuenta (RF-06 descartado — ADR-0012); tabla `user_progress` creada en Supabase con RLS. RF-01 enmendado para reflejar el gate de registro. Pendiente: conectar el frontend a `user_progress` y proteger `POST /chat` verificando el JWT. |
 | 0.7 | 2026-09-07 | Persistencia de progreso conectada: `useUserProgress` lee/crea la fila de `user_progress` al iniciar sesión y la actualiza en cada cambio de episodio, reemplazando el estado local de `Layout`. Se corrigió una carrera en Login/Register donde el redirect a `/` se disparaba antes de que el contexto de sesión se actualizara, rebotando de vuelta a `/login` — ahora se navega en un efecto que observa `session`. El `EpisodeSelector` se oculta por completo sin sesión iniciada, en vez de mostrarse deshabilitado. RF-03/04/05 marcados como implementados. |
+| 0.8 | 2026-09-07 | `POST /chat` ahora verifica el JWT de sesión de Supabase vía JWKS (`services/auth.py`, `pyjwt[crypto]`) antes de correr el pipeline RAG; el frontend manda el `access_token` como bearer en cada llamada. Con esto se cierra Fase 4, salvo RF-12 (rate limit por usuario): se discutió un diseño (contador en memoria por `user_id`, apagado por defecto) pero se pospuso dado que el acceso es invite-only y de bajo tráfico por ahora — queda anotado como pendiente, no bloquea el cierre de fase. También se documentó que un `RateLimitError` de Groq hoy llega al chat como el mensaje crudo del proveedor, pendiente de un mensaje propio. Arranca Fase 6 (Producción). |

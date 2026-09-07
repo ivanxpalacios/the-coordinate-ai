@@ -1,15 +1,15 @@
-import { useState } from 'react'
 import { Link, Outlet, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../features/auth/useAuth'
+import { useUserProgress } from '../../features/progress/useUserProgress'
 import EpisodeSelector from '../progress/EpisodeSelector'
 
 export interface LayoutContext {
-  userEpisode: number
+  userEpisode: number | null
 }
 
 function Layout() {
-  const [userEpisode, setUserEpisode] = useState(9)
   const { session, signOut } = useAuth()
+  const { userEpisode, setUserEpisode } = useUserProgress()
   const navigate = useNavigate()
 
   async function handleSignOut() {
@@ -24,7 +24,13 @@ function Layout() {
           THE COORDINATE AI
         </Link>
         <div className="flex items-center gap-4">
-          <EpisodeSelector value={userEpisode} onChange={setUserEpisode} />
+          {session && (
+            <EpisodeSelector
+              value={userEpisode ?? 1}
+              onChange={setUserEpisode}
+              disabled={userEpisode === null}
+            />
+          )}
           <Link to="/about" className="font-mono text-sm text-fog hover:text-ash">
             About
           </Link>

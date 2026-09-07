@@ -4,9 +4,9 @@
 
 | Campo | Valor |
 |---|---|
-| **Versión del documento** | 0.6 |
+| **Versión del documento** | 0.7 |
 | **Fecha** | 2026-09-07 |
-| **Estado** | En desarrollo — Fase 4 (Autenticación) en progreso: registro, login y chat protegido completos; persistencia de progreso en curso |
+| **Estado** | En desarrollo — Fase 4 (Autenticación) en progreso: registro, login, chat protegido y persistencia de progreso completos; falta proteger `/chat` en el backend |
 | **Tipo** | Proyecto fanmade, no comercial, de portafolio |
 
 ---
@@ -109,9 +109,9 @@ Demostrar capacidad de llevar un producto de idea a producción, resolviendo un 
 |---|---|---|
 | RF-01 | El usuario puede registrarse con email y contraseña. | Must — enmendado: el registro es por invitación, requiere además un código de acceso compartido, validado por el backend antes de crear la cuenta en Supabase (ver ADR-0011). |
 | RF-02 | El usuario puede iniciar y cerrar sesión. | Must — implementado (`AuthContext`, login directo contra Supabase). |
-| RF-03 | El usuario declara su progreso: temporada y episodio. | Must |
-| RF-04 | El progreso se persiste y se recupera al volver a entrar. | Must |
-| RF-05 | El usuario puede actualizar su progreso en cualquier momento. | Must |
+| RF-03 | El usuario declara su progreso: temporada y episodio. | Must — implementado (`EpisodeSelector`, oculto sin sesión). |
+| RF-04 | El progreso se persiste y se recupera al volver a entrar. | Must — implementado (`user_progress` en Supabase, `useUserProgress`). |
+| RF-05 | El usuario puede actualizar su progreso en cualquier momento. | Must — implementado. |
 | RF-06 | Un visitante sin cuenta puede probar el chat en modo demo limitado. | **Descartado del MVP** — decisión de sesión 2026-09-07, ver ADR-0012. El chat completo requiere cuenta; `/about` sigue público. |
 
 ### 6.2 Chat
@@ -449,7 +449,7 @@ Generar vectores e insertar en `knowledge_chunks`. El pipeline debe ser idempote
 ### Fase 4 — Autenticación
 
 - Supabase Auth integrado — hecho: cliente + `AuthContext`, registro con gate de código de acceso (ADR-0011), login/logout, `/` protegido con `RequireAuth` (ADR-0012)
-- Persistencia de progreso — en curso: tabla `user_progress` creada en Supabase, falta conectar el frontend
+- Persistencia de progreso — hecho: tabla `user_progress` en Supabase (RLS), `useUserProgress` la lee/crea al iniciar sesión y escribe en cada cambio de episodio; el `EpisodeSelector` se oculta sin sesión en vez de mostrarse deshabilitado
 - Protección de rutas y rate limiting — pendiente: falta verificar el JWT en `POST /chat` (backend)
 
 ### Fase 5 — Escalado de datos
@@ -531,3 +531,4 @@ Este proyecto es un vehículo de aprendizaje. La IA asiste, no sustituye.
 | 0.4 | 2026-09-04 | `POST /chat` migrado de respuesta completa a streaming vía Server-Sent Events (SSE), como preparación para la Fase 3. Se agregó `stream_complete` en `services/llm.py` y el endpoint ahora responde con `StreamingResponse` emitiendo eventos `sources`, `token` y `done` (o `error` si falla el proveedor a media generación). Ver ADR-0010. |
 | 0.5 | 2026-09-06 | Fase 3 (Frontend) cerrada de forma tentativa: se fusionó el Home dentro de `About` (propuesta de valor, disclaimer fanmade y CTA al chat), el `BriefingCard` se fijó fuera del área con scroll y ahora muestra temporada/episodio/título (igual formato que el selector) en vez del número global, con texto explícito sobre el mecanismo anti-spoiler y referencia al selector de progreso. Se ajustó el ancho del `EpisodeSelector` para evitar espacio muerto. Pendiente: pulir detalles menores de `About` cuando se decida. Arranca Fase 4 (Autenticación). |
 | 0.6 | 2026-09-07 | Fase 4 en progreso: cliente de Supabase y `AuthContext` en el frontend; `POST /auth/register` en el backend valida un código de acceso compartido y crea la cuenta vía Admin API de Supabase (email pre-confirmado, sin dependencia de correo saliente — ADR-0011); pantallas de Login/Register; el chat (`/`) ahora requiere sesión vía `RequireAuth`, quedando fuera del MVP el modo demo sin cuenta (RF-06 descartado — ADR-0012); tabla `user_progress` creada en Supabase con RLS. RF-01 enmendado para reflejar el gate de registro. Pendiente: conectar el frontend a `user_progress` y proteger `POST /chat` verificando el JWT. |
+| 0.7 | 2026-09-07 | Persistencia de progreso conectada: `useUserProgress` lee/crea la fila de `user_progress` al iniciar sesión y la actualiza en cada cambio de episodio, reemplazando el estado local de `Layout`. Se corrigió una carrera en Login/Register donde el redirect a `/` se disparaba antes de que el contexto de sesión se actualizara, rebotando de vuelta a `/login` — ahora se navega en un efecto que observa `session`. El `EpisodeSelector` se oculta por completo sin sesión iniciada, en vez de mostrarse deshabilitado. RF-03/04/05 marcados como implementados. |

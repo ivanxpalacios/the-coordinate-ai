@@ -1,3 +1,4 @@
+import { supabase } from './supabase'
 import type { ChatEvent } from '../types/chat'
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
@@ -23,9 +24,20 @@ export async function* streamChat(
   question: string,
   userEpisode: number,
 ): AsyncGenerator<ChatEvent> {
+  const { data } = await supabase.auth.getSession()
+  const accessToken = data.session?.access_token
+
+  if (!accessToken) {
+    yield { type: 'error', message: 'Your session expired. Please log in again.' }
+    return
+  }
+
   const response = await fetch(`${API_BASE_URL}/chat`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
     body: JSON.stringify({ question, user_episode: userEpisode }),
   })
 

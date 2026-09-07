@@ -1,10 +1,11 @@
 import json
 from collections.abc import AsyncIterator
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from fastapi.responses import StreamingResponse
 
 from models.chat import ChatRequest, ChatSource
+from services.auth import require_user
 from services.embeddings import embed_query
 from services.llm import LlmError, stream_complete
 from services.prompts import build_messages
@@ -51,5 +52,5 @@ async def _stream_chat(request: ChatRequest) -> AsyncIterator[str]:
 
 
 @router.post("/chat")
-async def chat(request: ChatRequest) -> StreamingResponse:
+async def chat(request: ChatRequest, user_id: str = Depends(require_user)) -> StreamingResponse:
     return StreamingResponse(_stream_chat(request), media_type="text/event-stream")

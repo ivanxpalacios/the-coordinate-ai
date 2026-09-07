@@ -1,12 +1,17 @@
 import { useState, type FormEvent } from 'react'
 
-function ChatInput() {
+interface ChatInputProps {
+  onSubmit: (question: string) => void
+  disabled?: boolean
+}
+
+function ChatInput({ onSubmit, disabled = false }: ChatInputProps) {
   const [value, setValue] = useState('')
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault()
-    if (!value.trim()) return
-    console.log('submit (not wired yet):', value)
+    if (!value.trim() || disabled) return
+    onSubmit(value)
     setValue('')
   }
 
@@ -20,12 +25,13 @@ function ChatInput() {
           type="text"
           value={value}
           onChange={(event) => setValue(event.target.value)}
+          disabled={disabled}
           placeholder="Ask about the story so far…"
-          className="flex-1 bg-transparent text-sm text-ash placeholder:text-fog focus:outline-none"
+          className="flex-1 bg-transparent text-sm text-ash placeholder:text-fog focus:outline-none disabled:opacity-50"
         />
         <button
           type="submit"
-          disabled={!value.trim()}
+          disabled={!value.trim() || disabled}
           aria-label="Send"
           className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-signal text-ink transition-opacity disabled:opacity-30"
         >

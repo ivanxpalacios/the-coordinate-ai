@@ -2,6 +2,10 @@ import { useState } from 'react'
 import { Link, Outlet } from 'react-router-dom'
 import EpisodeSelector from '../progress/EpisodeSelector'
 
+export interface LayoutContext {
+  userEpisode: number
+}
+
 function Layout() {
   const [userEpisode, setUserEpisode] = useState(9)
 
@@ -20,7 +24,7 @@ function Layout() {
       </nav>
 
       <main className="min-h-0 flex-1">
-        <Outlet />
+        <Outlet context={{ userEpisode } satisfies LayoutContext} />
       </main>
 
       <footer className="border-t border-line px-6 py-3 text-center font-mono text-xs text-fog">

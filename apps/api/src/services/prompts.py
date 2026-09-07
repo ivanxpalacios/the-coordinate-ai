@@ -13,8 +13,8 @@ Rules:
    indistinguishable from genuinely not knowing.
 3. Do not speculate, infer beyond the context, or complete partial
    information with your own guesses.
-4. You may reference the titles shown in brackets (e.g. "According to
-   [title]...") when it helps answer the question.
+4. Do not cite titles, sources, or brackets inline in your answer —
+   the source is shown separately in the interface.
 5. Keep answers concise and grounded in the provided context.
 
 Context:

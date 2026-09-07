@@ -39,6 +39,20 @@ function About() {
           >
             Start asking →
           </Link>
+          <p className="mt-4 font-mono text-xs text-fog">
+            Built by Iván Palacios —{' '}
+            <a href="https://github.com/ivanxpalacios" className="hover:text-ash" target="_blank" rel="noreferrer">
+              GitHub
+            </a>{' '}
+            ·{' '}
+            <a href="https://www.linkedin.com/in/ivanpalaciosdev/" className="hover:text-ash" target="_blank" rel="noreferrer">
+              LinkedIn
+            </a>{' '}
+            ·{' '}
+            <a href="https://ivanpalacios.dev/" className="hover:text-ash" target="_blank" rel="noreferrer">
+              Portfolio
+            </a>
+          </p>
         </section>
 
         <hr className="my-8 border-line" />

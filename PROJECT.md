@@ -467,6 +467,23 @@ Generar vectores e insertar en `knowledge_chunks`. El pipeline debe ser idempote
 - Documentación final y ADRs
 - Video demo para el portafolio
 
+#### Infraestructura desplegada (estado real, verificado en consola el 8 de septiembre de 2026)
+
+La decisión de usar Oracle Cloud vive en ADR-0007; esto es el inventario de lo que efectivamente quedó provisionado.
+
+| Recurso | Valor |
+|---|---|
+| Instancia | `instance-20260907-1359`, shape `VM.Standard.A1.Flex`, 2 OCPU / 12 GB RAM |
+| Región | US East (Ashburn) — `us-ashburn-1` |
+| Imagen | Canonical Ubuntu 24.04 (aarch64) |
+| Boot volume | 47 GB, cifrado in-transit habilitado |
+| Red | VCN `vcn-20260907-1406`, subred `subnet-20260907-1406` (`10.0.0.0/24`, regional) |
+| Firewall | Solo NSG `ig-quick-action-NSG` — la subred no tiene ninguna Security List asociada, todo el control de tráfico a nivel de nube pasa por el NSG |
+| Reglas del NSG | Ingress TCP 22 (SSH), 80 (HTTP) y 443 (HTTPS) desde `0.0.0.0/0`; egress abierto total |
+| Cuenta | Todavía en **Free Trial**, no en Always Free — el shape usado cabe dentro del límite Always Free (4 OCPU / 24 GB Ampere A1 por tenancy), pero falta confirmar que la transición automática al terminar el trial no interrumpa la instancia |
+
+Nota: la región quedó en US East (Ashburn), no en EU/APAC como recomendaba la sección de consecuencias de ADR-0007 para mayor disponibilidad de capacidad ARM — no ha causado problemas hasta ahora, pero es la causa más probable si en el futuro aparecen problemas de aprovisionamiento o de latencia con usuarios fuera de US.
+
 ---
 
 ## 14. Métricas de éxito

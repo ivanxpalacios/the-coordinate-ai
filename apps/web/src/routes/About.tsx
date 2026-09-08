@@ -14,8 +14,8 @@ const stack: StackRow[] = [
   { layer: 'Backend', tech: 'FastAPI · Python 3.12', status: 'live', note: '/chat streams over SSE' },
   { layer: 'Vector store', tech: 'Neon Postgres + pgvector', status: 'live', note: '~786 chunks ingested' },
   { layer: 'LLM', tech: 'Groq', status: 'live', note: 'free tier' },
-  { layer: 'Auth & progress', tech: 'Supabase Auth', status: 'todo', note: 'Phase 4' },
-  { layer: 'Deployment', tech: 'Vercel + Oracle Cloud', status: 'todo', note: 'Phase 6' },
+  { layer: 'Auth & progress', tech: 'Supabase Auth', status: 'live', note: 'login, register, JWT on /chat' },
+  { layer: 'Deployment', tech: 'Vercel + Oracle Cloud', status: 'live', note: 'live at the-coordinate-ai.ivanpalacios.dev' },
 ]
 
 function About() {

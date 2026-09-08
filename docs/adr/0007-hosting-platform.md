@@ -20,6 +20,14 @@ Oracle requires a credit card on file for a $1 identity hold (no recurring charg
 
 Oracle's stock Ubuntu images ship with `iptables` preconfigured to accept only inbound SSH (port 22) and reject everything else by default, independently of and in addition to the cloud-level firewall (Network Security Groups / Security Lists). Opening a port in the NSG is not sufficient to expose a service — a matching `iptables` rule must also be added inside the instance itself (and persisted with `netfilter-persistent`, or it reverts on reboot). This is not prominently documented in the Oracle console, and the failure mode ("connection refused") is indistinguishable from a port simply not being open at the NSG level, which cost debugging time during Phase 6 deployment.
 
+### Rollout notes (verified in console, September 8th 2026)
+
+The instance ended up provisioned in **US East (Ashburn)** rather than EU or APAC, despite the reliability recommendation above — capacity happened to be available there at provisioning time. No issues observed so far; worth revisiting if ARM capacity problems or latency complaints show up later, since this is the most likely cause.
+
+The quick-launch flow that created the VCN did not attach any Security List to the subnet — the instance's only network-level firewall is a Network Security Group (`ig-quick-action-NSG`, its default generated name, never renamed) with SSH (22), HTTP (80) and HTTPS (443) open from `0.0.0.0/0`. This matches the intended exposure (a public web API plus SSH for deploys) but means the NSG is a single point of firewall configuration — there is no defense-in-depth from a second security-list layer, unlike Oracle's more common default setup.
+
+The tenancy is still running on **Free Trial** credits, not yet on the Always Free tier itself. The provisioned shape (2 OCPU / 12 GB, `VM.Standard.A1.Flex`) fits inside the Always Free Ampere A1 allowance (4 OCPU / 24 GB per tenancy), so it should survive the trial-to-Always-Free transition automatically — but this has not been observed happening yet and should be confirmed once the trial period ends.
+
 ## 6. Date
 
 August 29th, 2026.

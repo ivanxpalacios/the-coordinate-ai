@@ -19,7 +19,7 @@ function Layout() {
 
   return (
     <div className="flex h-svh flex-col">
-      <nav className="flex items-center justify-between border-b border-line px-6 py-3">
+      <nav className="flex flex-wrap items-center justify-between gap-y-2 border-b border-line px-4 py-3 sm:px-6">
         <Link to="/" className="font-display text-lg tracking-wide">
           THE COORDINATE AI
         </Link>

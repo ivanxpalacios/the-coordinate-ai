@@ -1,6 +1,6 @@
 # Content licensing strategy for mixed-ownership assets (code, scraped text, images)
 
-## 1. Status: Proposed
+## 1. Status: Accepted
 
 ## 2. Context
 

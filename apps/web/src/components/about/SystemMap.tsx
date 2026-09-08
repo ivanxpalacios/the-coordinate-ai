@@ -30,7 +30,7 @@ function SystemMap() {
       </div>
 
       <div className="mt-4 flex flex-wrap items-center gap-2">
-        <Node label="Supabase Auth — TODO (Phase 4)" sealed />
+        <Node label="Supabase Auth — JWT verified" />
       </div>
     </div>
   )

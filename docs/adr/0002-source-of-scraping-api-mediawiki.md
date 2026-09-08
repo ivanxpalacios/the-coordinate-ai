@@ -1,6 +1,6 @@
 # Source of scraping API Mediawiki
 
-## 1. Status: Proposed
+## 1. Status: Accepted
 
 ## 2. Context
 

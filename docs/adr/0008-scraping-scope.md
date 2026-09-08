@@ -1,6 +1,6 @@
 # Scraping and chunking scope for MVP (D-06)
 
-## 1. Status: Proposed
+## 1. Status: Accepted
 
 ## 2. Context
 

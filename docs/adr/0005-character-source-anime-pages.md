@@ -1,6 +1,6 @@
 # Character data source: anime pages instead of manga pages
 
-## 1. Status: Proposed
+## 1. Status: Accepted
 
 ## 2. Context
 

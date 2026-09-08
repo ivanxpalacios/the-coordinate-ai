@@ -1,6 +1,6 @@
 # LLM provider and embeddings model selection (D-01, D-02)
 
-## 1. Status: Proposed
+## 1. Status: Accepted
 
 ## 2. Context
 

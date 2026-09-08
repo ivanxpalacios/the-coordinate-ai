@@ -1,6 +1,6 @@
 # reveal_episode labeling: episodes vs. characters (pilot)
 
-## 1. Status: Proposed
+## 1. Status: Accepted
 
 ## 2. Context
 

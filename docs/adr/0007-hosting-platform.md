@@ -1,6 +1,6 @@
 # Hosting platform selection (D-03)
 
-## 1. Status: Proposed
+## 1. Status: Accepted
 
 ## 2. Context
 

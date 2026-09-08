@@ -24,7 +24,7 @@ function EpisodeSelector({ value, onChange, disabled = false }: EpisodeSelectorP
       onChange={(event) => onChange(Number(event.target.value))}
       disabled={disabled}
       aria-label="Your progress"
-      style={{ width: `${TITLE_MAX_LENGTH + 14}ch` }}
+      style={{ width: `min(55vw, ${TITLE_MAX_LENGTH + 14}ch)` }}
       className="overflow-hidden text-ellipsis whitespace-nowrap border border-line bg-panel px-2 py-0.5 font-mono text-xs text-fog focus:outline-none focus:text-ash disabled:opacity-50"
     >
       {seasons.map((season) => (

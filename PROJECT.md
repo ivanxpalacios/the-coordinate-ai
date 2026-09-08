@@ -4,9 +4,9 @@
 
 | Campo | Valor |
 |---|---|
-| **Versión del documento** | 0.8 |
-| **Fecha** | 2026-09-07 |
-| **Estado** | En desarrollo — Fase 4 (Autenticación) completada en registro, login, protección de rutas y persistencia de progreso. Rate limit por usuario (RF-12) queda pendiente, diseño discutido pero no implementado; no bloquea el cierre de fase dado el acceso privado/invite-only. Arranca Fase 6 (Producción) |
+| **Versión del documento** | 0.9 |
+| **Fecha** | 2026-09-08 |
+| **Estado** | En desarrollo — Fase 4 (Autenticación) cerrada. Fase 6 (Producción) en progreso: ambos servicios desplegados y live en https://the-coordinate-ai.ivanpalacios.dev/. Pendientes de Fase 6: observabilidad/logs (pospuesto), documentación final y ADRs, video demo |
 | **Tipo** | Proyecto fanmade, no comercial, de portafolio |
 
 ---
@@ -462,7 +462,7 @@ Generar vectores e insertar en `knowledge_chunks`. El pipeline debe ser idempote
 
 ### Fase 6 — Producción
 
-- Despliegue de ambos servicios
+- ~~Despliegue de ambos servicios~~ — hecho, live en https://the-coordinate-ai.ivanpalacios.dev/ (Vercel + Oracle Cloud)
 - Observabilidad y logs
 - Documentación final y ADRs
 - Video demo para el portafolio
@@ -535,3 +535,4 @@ Este proyecto es un vehículo de aprendizaje. La IA asiste, no sustituye.
 | 0.6 | 2026-09-07 | Fase 4 en progreso: cliente de Supabase y `AuthContext` en el frontend; `POST /auth/register` en el backend valida un código de acceso compartido y crea la cuenta vía Admin API de Supabase (email pre-confirmado, sin dependencia de correo saliente — ADR-0011); pantallas de Login/Register; el chat (`/`) ahora requiere sesión vía `RequireAuth`, quedando fuera del MVP el modo demo sin cuenta (RF-06 descartado — ADR-0012); tabla `user_progress` creada en Supabase con RLS. RF-01 enmendado para reflejar el gate de registro. Pendiente: conectar el frontend a `user_progress` y proteger `POST /chat` verificando el JWT. |
 | 0.7 | 2026-09-07 | Persistencia de progreso conectada: `useUserProgress` lee/crea la fila de `user_progress` al iniciar sesión y la actualiza en cada cambio de episodio, reemplazando el estado local de `Layout`. Se corrigió una carrera en Login/Register donde el redirect a `/` se disparaba antes de que el contexto de sesión se actualizara, rebotando de vuelta a `/login` — ahora se navega en un efecto que observa `session`. El `EpisodeSelector` se oculta por completo sin sesión iniciada, en vez de mostrarse deshabilitado. RF-03/04/05 marcados como implementados. |
 | 0.8 | 2026-09-07 | `POST /chat` ahora verifica el JWT de sesión de Supabase vía JWKS (`services/auth.py`, `pyjwt[crypto]`) antes de correr el pipeline RAG; el frontend manda el `access_token` como bearer en cada llamada. Con esto se cierra Fase 4, salvo RF-12 (rate limit por usuario): se discutió un diseño (contador en memoria por `user_id`, apagado por defecto) pero se pospuso dado que el acceso es invite-only y de bajo tráfico por ahora — queda anotado como pendiente, no bloquea el cierre de fase. También se documentó que un `RateLimitError` de Groq hoy llega al chat como el mensaje crudo del proveedor, pendiente de un mensaje propio. Arranca Fase 6 (Producción). |
+| 0.9 | 2026-09-08 | Fase 6 en progreso: front desplegado en Vercel y back en Oracle Cloud, producto live en https://the-coordinate-ai.ivanpalacios.dev/. Se actualizó `About.tsx` y `SystemMap.tsx` para reflejar el estado real (ya no hay TODOs de Auth ni Deployment). Observabilidad/logs pospuestos por ahora. Documentación final, ADRs pendientes y video demo quedan como próximos pasos antes de cerrar la fase. |

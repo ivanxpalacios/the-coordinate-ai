@@ -27,7 +27,7 @@ function ChatInput({ onSubmit, disabled = false }: ChatInputProps) {
           onChange={(event) => setValue(event.target.value)}
           disabled={disabled}
           placeholder="Ask about the story so far…"
-          className="flex-1 bg-transparent text-sm text-ash placeholder:text-fog focus:outline-none disabled:opacity-50"
+          className="flex-1 bg-transparent text-base text-ash placeholder:text-fog focus:outline-none disabled:opacity-50 sm:text-sm"
         />
         <button
           type="submit"

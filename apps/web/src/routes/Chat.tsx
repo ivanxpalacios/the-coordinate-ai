@@ -84,17 +84,17 @@ function Chat() {
 
   return (
     <div className="flex h-full flex-col">
-      {currentEpisode && (
-        <BriefingCard>
-          <strong className="text-ash">
-            Spoiler-safe through S{currentEpisode.season} · EP{' '}
-            {String(currentEpisode.episode_in_season).padStart(2, '0')} — {currentEpisode.title}.
-          </strong>{' '}
-          Answers stay inside that point in the story — nothing from later episodes. Adjust your
-          progress anytime with the selector, top right.
-        </BriefingCard>
-      )}
       <div ref={scrollRef} onScroll={handleScroll} className="relative flex-1 overflow-y-auto">
+        {currentEpisode && (
+          <BriefingCard>
+            <strong className="text-ash">
+              Spoiler-safe through S{currentEpisode.season} · EP{' '}
+              {String(currentEpisode.episode_in_season).padStart(2, '0')} — {currentEpisode.title}.
+            </strong>{' '}
+            Answers stay inside that point in the story — nothing from later episodes. Adjust your
+            progress anytime with the selector, top right.
+          </BriefingCard>
+        )}
         <MessageList messages={messages} />
         <div
           aria-hidden="true"

@@ -4,11 +4,15 @@ on:
   push:
     paths:
       - "apps/api/**"
+      - "docker-compose.prod.yml"
+      - ".github/workflows/api.yml"
   pull_request:
     branches:
       - main
     paths:
       - "apps/api/**"
+      - "docker-compose.prod.yml"
+      - ".github/workflows/api.yml"
 
 jobs:
   lint-and-test:

@@ -19,7 +19,7 @@ function updateLastMessage(prev: Message[], updater: (message: Message) => Messa
 }
 
 function Chat() {
-  const { userEpisode } = useOutletContext<LayoutContext>()
+  const { userEpisode, showEpisodeNames } = useOutletContext<LayoutContext>()
   const currentEpisode = episodeList.find((episode) => episode.global_number === userEpisode)
   const progressLoaded = userEpisode !== null
   const [messages, setMessages] = useState<Message[]>([])
@@ -88,8 +88,9 @@ function Chat() {
         {currentEpisode && (
           <BriefingCard>
             <strong className="text-ash">
-              Spoiler-safe through S{currentEpisode.season} · EP{' '}
-              {String(currentEpisode.episode_in_season).padStart(2, '0')} — {currentEpisode.title}.
+              Spoiler-safe through #{currentEpisode.global_number} · S{currentEpisode.season} · EP{' '}
+              {String(currentEpisode.episode_in_season).padStart(2, '0')}
+              {showEpisodeNames ? ` — ${currentEpisode.title}` : ''}.
             </strong>{' '}
             Answers stay inside that point in the story — nothing from later episodes. Adjust your
             progress anytime with the selector, top right.
